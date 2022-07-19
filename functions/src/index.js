@@ -123,5 +123,6 @@ function botApp() {
 
   client.login(process.env.DISCORD_BOT_LOGIN);
 }
+botApp()
+// module.exports.run_discord_bot = functions.https.onRequest();
 
-module.exports.run_discord_bot = functions.https.onRequest(botApp());
