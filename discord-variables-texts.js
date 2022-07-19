@@ -6,7 +6,7 @@
 const discordTexts = {
   channel: {
     verifyEmailButton: {
-      label: "Verificar e-mail"
+      label: "Liberar meu acesso."
     },
 
     // A mensagem junto com o botão na hora que o usuário entra no servidor
