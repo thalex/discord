@@ -1,1 +1,1 @@
-web: cross-env NODE_ENV=production nodemon functions/src/index.ts
+web: nodemon functions/src/index.ts
