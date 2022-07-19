@@ -93,7 +93,7 @@ function botApp() {
     const emailInformed = await verifyIfEmailIsValid(interaction);
 
     if(emailInformed) {
-      const webhookResponse = await axios.post(process.env.WEBHOOK_URL, {
+      const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, {
         email: emailInformed,
         member
       });
