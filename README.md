@@ -8,6 +8,6 @@
 ##### Use {{user}} para que no código substitua este valor pelo @usuario#tag
 ##### exemplo:
 ##### variavel: "{{user}}, bem vindo ao servidor!"
-##### resultado: `@tiaguin061#2748, bem vindo ao servidor!`
+##### resultado: `@tiaguin061#2748`, bem vindo ao servidor!
 
 #### 4- Aperte em "commit changes(salvar alterações)" que upará o app automaticamente.
