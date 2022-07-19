@@ -12,14 +12,14 @@ const discordTexts = {
     // A mensagem junto com o botão na hora que o usuário entra no servidor
     welcome: {
       text: `
-        {{user}}, seja bem vindo.
+        {{user}}, seja bem vindo à Comunidade de Automação, aperte no botão abaixo para verificar seu e-mail e liberar seu acesso.
       `
     },
 
     // aquele poupt para perguntar o e-mail
     modal: {
       title: "Validação de e-mail",
-      emailInputLabel: "Qual é o seu e-mail?",
+      emailInputLabel: "Digite seu e-mail de compra da hotmart",
     },
   },
   
@@ -28,8 +28,8 @@ const discordTexts = {
   // No consumo do webhook da integromat
   webHook: {
     success: "{{user}}, seu e-mail foi validado com sucesso.",
-    error: "{{user}}, seu e-mail provalvemente não existe no google sheet",
-    notFoundStatus: "{{user}}, algum erro ocorreu. Talvez o integromat fora do ar. Volte mais tarde"
+    error: "{{user}}, e-mail não encontrado, tente novamente ou entre em contato com o suporte.",
+    notFoundStatus: "{{user}}, algum erro ocorreu. Entre em contato com o suporte."
   },
 }
 
