@@ -133,7 +133,7 @@ function botApp() {
   const log = `[Log]: At [${new Date()}] Discord Bot server started.`
   console.log(log);
 
-  client.login(process.env.DISCORD_BOT_LOGIN);
+  client.login(process.env.DISCORD_BOT_TOKEN);
 }
 
 botApp();
