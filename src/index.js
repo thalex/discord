@@ -99,22 +99,31 @@ function botApp() {
       });
       
       const result = webhookResponse.data;
-
-      const status = result.status.toLowerCase();
-
-      if(status === 'success') {
-        await interaction.reply({ 
-          content: replaceToMemberUserTag(discordTexts.webHook.success, member),
-          ephemeral: true,
-        });
-      }
       
-      if(status === 'error') {
-        await interaction.reply({ 
-          content: replaceToMemberUserTag(discordTexts.webHook.error, member),
-          ephemeral: true,
-        });
+      if(result.status) {
+        const status = result.status.toLowerCase();
+
+        if(status === 'success') {
+          await interaction.reply({ 
+            content: replaceToMemberUserTag(discordTexts.webHook.success, member),
+            ephemeral: true,
+          });
+        }
+        
+        if(status === 'error') {
+          await interaction.reply({ 
+            content: replaceToMemberUserTag(discordTexts.webHook.error, member),
+            ephemeral: true,
+          });
+        }
+
+        return;
       }
+
+      await interaction.reply({ 
+        content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, member),
+        ephemeral: true,
+      });
       return null;
     }
 
