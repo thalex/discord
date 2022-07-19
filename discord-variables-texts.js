@@ -1,6 +1,7 @@
 // Use {{user}} para que no código substitua este valor pelo @usuario#tag
 // exemplo:
 // variavel: `{{user}}, bem vindo ao servidor!`
+// resultado: @tiaguin061#2748, bem vindo ao servidor!
 
 const discordTexts = {
   channel: {
@@ -8,10 +9,14 @@ const discordTexts = {
       label: "Verificar e-mail"
     },
 
-    initialMessage: `
-    [ambiente dev]{{user}}, Bem vindo! Para dar continuidade no servidor, precisamos que você verifique seu e-mail. Ao clicar no botão, abrirá um Modal para preencher o e-mail.
-    `,
+    // A mensagem junto com o botão na hora que o usuário entra no servidor
+    welcome: {
+      text: `
+        {{user}}, seja bem vindo.
+      `
+    },
 
+    // aquele poupt para perguntar o e-mail
     modal: {
       title: "Validação de e-mail",
       emailInputLabel: "Qual é o seu e-mail?",
@@ -20,16 +25,11 @@ const discordTexts = {
   
   emailFormatedNotValidError: `{{user}}, digite um formato de e-mail válido.`,
 
+  // No consumo do webhook da integromat
   webHook: {
     success: "{{user}}, seu e-mail foi validado com sucesso.",
     error: "{{user}}, algum erro aconteceu. Tente novamente!"
   },
-
-  welcome: {
-    text: `
-      {{user}}, seja bem vindo.
-    `
-  }
 }
 
 function replaceToMemberUserTag(text, user) {
