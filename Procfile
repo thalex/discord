@@ -1,1 +1,1 @@
-web: nodemon src/index.ts
+web: 'nodemon src/index.ts -p 3500'
