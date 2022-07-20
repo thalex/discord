@@ -6,20 +6,20 @@
 const discordTexts = {
   channel: {
     verifyEmailButton: {
-      label: "Verificar e-mail"
+      label: "Liberar meu acesso."
     },
 
     // A mensagem junto com o botão na hora que o usuário entra no servidor
     welcome: {
       text: `
-        {{user}}, seja bem vindo.
+        {{user}}, seja bem vindo à Comunidade de Automação, aperte no botão abaixo para verificar seu e-mail e liberar seu acesso.
       `
     },
 
     // aquele poupt para perguntar o e-mail
     modal: {
       title: "Validação de e-mail",
-      emailInputLabel: "Qual é o seu e-mail?",
+      emailInputLabel: "Digite seu e-mail de compra da hotmart",
     },
   },
   
@@ -38,9 +38,9 @@ const discordTexts = {
           link: "https://discord.com"
         }
       },
-      text: "{{user}}, seu e-mail provalvemente não existe no google sheet"
+      text: "{{user}}, e-mail não encontrado, tente novamente ou entre em contato com o suporte."
     },
-    notFoundStatus: "{{user}}, algum erro ocorreu. Talvez o integromat fora do ar. Volte mais tarde"
+    notFoundStatus: "{{user}}, algum erro ocorreu. Entre em contato com o suporte."
   },
 }
 
