@@ -12,7 +12,7 @@ const discordTexts = {
     // A mensagem junto com o botão na hora que o usuário entra no servidor
     welcome: {
       text: `
-        {{user}}, seja bem vindo à Comunidade de Automação, aperte no botão abaixo para verificar seu e-mail e liberar seu acesso.
+        Seja bem vindo à Comunidade de Automação, aperte no botão abaixo para verificar seu e-mail e liberar seu acesso.
       `
     },
 

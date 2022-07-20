@@ -33,11 +33,13 @@ async function loadVerifyEmailButton(member, channelIdParam) {
     );
 
   const message = await channel.send({ 
-    content: replaceToMemberUserTag(discordTexts.channel.welcome.text, member),
+    content: member ? replaceToMemberUserTag(discordTexts.channel.welcome.text, member) : discordTexts.channel.welcome.text,
     components: [openModalBtn] 
   });
 
-  messages.set(member.user.id, message.id);
+  if(member) {
+    messages.set(member.user.id, message.id);
+  }
 }
 
 async function handleButtonInteraction(interaction) {
@@ -85,8 +87,16 @@ async function verifyIfEmailIsValid(interaction) {
 const messages = new Map();
 
 function botApp() {
-  client.on('guildMemberAdd', (member) => {
-    loadVerifyEmailButton(member);
+  client.on('messageCreate', (message) => {
+    const channelId = message.channel.id.user;
+
+    if(message.content === '/load-verify-email-button') {
+      loadVerifyEmailButton(null, channelId);
+
+      if(message.deletable) {
+          message.delete();
+      }
+    }
   });
 
   client.on('interactionCreate', async (interaction) => {
