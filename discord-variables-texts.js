@@ -28,7 +28,18 @@ const discordTexts = {
   // No consumo do webhook da integromat
   webHook: {
     success: "{{user}}, seu e-mail foi validado com sucesso.",
-    error: "{{user}}, seu e-mail provalvemente não existe no google sheet",
+    error: {
+      buttons: {
+        verifyEmailAgain: {
+          label: "Verificar novamente"
+        },
+        talkToSuport: {
+          label: "Falar com o suporte",
+          link: "https://discord.com"
+        }
+      },
+      text: "{{user}}, seu e-mail provalvemente não existe no google sheet"
+    },
     notFoundStatus: "{{user}}, algum erro ocorreu. Talvez o integromat fora do ar. Volte mais tarde"
   },
 }

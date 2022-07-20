@@ -22,18 +22,21 @@ const channelId = process.env.DISCORD_CHANNEL_ID;
 
 async function loadVerifyEmailButton(member, channelIdParam) {
   const channel = client.channels.cache.get(channelIdParam || channelId);
-  const row = new MessageActionRow()
+
+  const openModalBtn = new MessageActionRow()
     .addComponents(
       new MessageButton()
-        .setCustomId('primary')
+        .setCustomId('openModalBtn')
         .setLabel(replaceToMemberUserTag(discordTexts.channel.verifyEmailButton.label))
         .setStyle('PRIMARY'),
     );
 
-  channel.send({ 
+  const message = await channel.send({ 
     content: replaceToMemberUserTag(discordTexts.channel.welcome.text, member),
-    components: [row] 
+    components: [openModalBtn] 
   });
+
+  messages.set(member.user.id, message.id);
 }
 
 async function handleButtonInteraction(interaction) {
@@ -78,6 +81,8 @@ async function verifyIfEmailIsValid(interaction) {
   return userEmail;
 }
 
+const messages = new Map();
+
 function botApp() {
   client.on('guildMemberAdd', (member) => {
     loadVerifyEmailButton(member);
@@ -87,7 +92,7 @@ function botApp() {
     if (interaction.isButton()) {
       return handleButtonInteraction(interaction);
     };
-
+    
     const member = interaction.member.user;
 
     const emailInformed = await verifyIfEmailIsValid(interaction);
@@ -99,7 +104,7 @@ function botApp() {
       });
       
       const result = webhookResponse.data;
-      
+
       if(result.status) {
         const status = result.status.toLowerCase();
 
@@ -108,12 +113,39 @@ function botApp() {
             content: replaceToMemberUserTag(discordTexts.webHook.success, member),
             ephemeral: true,
           });
+
+          if(messages) {
+            const messageId = messages.get(interaction.user.id);
+
+            if(messageId) {
+              const message = await interaction.channel.messages.fetch(messageId);
+              
+              if (message.deletable) {
+                message.delete()
+              }
+
+              messages.delete(interaction.user.id)
+            }
+          }
         }
         
         if(status === 'error') {
+          const buttons = new MessageActionRow()
+            .addComponents(
+              new MessageButton()
+                .setCustomId('verifyEmailBtn')
+                .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.verifyEmailAgain.label, member))
+                .setStyle('PRIMARY'),
+              new MessageButton()
+                .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.label, member))
+                .setStyle('LINK')
+                .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member))
+            );
+
           await interaction.reply({ 
-            content: replaceToMemberUserTag(discordTexts.webHook.error, member),
+            content: replaceToMemberUserTag(discordTexts.webHook.error.text, member),
             ephemeral: true,
+            components: [buttons],
           });
         }
 
