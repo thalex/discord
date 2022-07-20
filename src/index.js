@@ -4,6 +4,7 @@ const { default: axios } = require('axios');
 const {
   discordTexts, replaceToMemberUserTag
 } = require('../discord-variables-texts');
+const express = require("express");
 
 const { 
   MessageButton, 
@@ -162,10 +163,14 @@ function botApp() {
     return null;
   });
 
-  const log = `[Log]: At [${new Date()}] Discord Bot server started. PORT: ${process.env.PORT}`
-  console.log(log);
-
   client.login(process.env.DISCORD_BOT_TOKEN);
+
+  const log = `[Log]: At [${new Date()}] Discord Bot server started.`
+
+  const app = express();
+  const port = process.env.PORT || 1323;
+  
+  app.listen(port, () => console.log(`${log} on port: ${port}`));
 }
 
 botApp();
