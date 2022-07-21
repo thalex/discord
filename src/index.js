@@ -374,10 +374,15 @@ const log = `[Log]: At [${new Date()}] Discord Bot server started.`
 const app = express();
 const port = 5000;
 
-async function loadApp() {
-  await client.login(process.env.DISCORD_BOT_TOKEN);
 
-  app.listen(process.env.PORT || 5000, () => console.log(`${log} on port: ${port}`));
+if (!(process.env.NODE_ENV === 'production')) {
+  process.on('SIGTERM', () => {
+    process.exit();
+  }); 
 }
 
-loadApp();
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`${log} on port: ${port}`)
+  
+  return client.login(process.env.DISCORD_BOT_TOKEN);
+});
