@@ -35,7 +35,7 @@ const discordTexts = {
     commands: {
       sair: {
         commandName: 'sair',
-        description: 'Ao executar este comando, você será removido do servidor. TESTE'
+        description: 'Ao executar este comando, você será removido do servidor.'
       }
     },
   },
@@ -51,7 +51,7 @@ const discordTexts = {
       `
     },
 
-    // aquele poupt para perguntar o e-mail
+    // aquele popup para perguntar o e-mail
     modal: {
       title: "Validação de e-mail",
       emailInputLabel: "Digite seu e-mail de compra da hotmart",
