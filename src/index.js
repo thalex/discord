@@ -81,6 +81,7 @@ async function verifyIfEmailIsValid(interaction) {
 }
 
 async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) {
+  const member = data.member;
   const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, {
     ...data,
     command,
@@ -123,7 +124,7 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
     }
 
     await interaction.reply({ 
-      content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, data.member),
+      content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, member),
       ephemeral: true,
     });
 
