@@ -179,57 +179,35 @@ async function discordServerLeaveMakeWebhook({data, interaction, command}) {
   return null;
 }
 
-function botApp() {
-  client.on('messageCreate', async (message) => {
-    const channelId = message.channel.id;
+client.on('messageCreate', async (message) => {
+  const channelId = message.channel.id;
 
-    if(message.content === '/load-verify-email-button') {
-      loadVerifyEmailButton(null, channelId);
+  if(message.content === '/load-verify-email-button') {
+    loadVerifyEmailButton(null, channelId);
 
-      if(message.deletable) {
-        message.delete();
-      }
+    if(message.deletable) {
+      message.delete();
     }
-  });
+  }
+});
 
-  client.on('interactionCreate', async (interaction) => {
-    const member = interaction.member;
-    const username = member.user.username;
-    const discriminator = member.user.discriminator;
-    const tag = `${username}#${discriminator}`;
+client.on('interactionCreate', async (interaction) => {
+  const member = interaction.member;
+  const username = member.user.username;
+  const discriminator = member.user.discriminator;
+  const tag = `${username}#${discriminator}`;
 
-    if (interaction.customId === 'openModalBtn') {
-      return handleButtonInteraction(interaction);
-    };
- 
-    if(interaction.isModalSubmit() && interaction.customId === 'validateEmailId') {
-      const emailInformed = await verifyIfEmailIsValid(interaction);
-  
-      if(emailInformed) {
-        await sendToValidateEmailFromMakeWebhook({
-          data: {
-            email: emailInformed,
-            member: {
-              ...member,
-              user: {
-                ...member.user,
-                tag,
-              }
-            },
-            command: null
-          },
-          interaction,
-          command: null,
-        });
-      }
-  
-      return null;
-    }
+  if (interaction.customId === 'openModalBtn') {
+    return handleButtonInteraction(interaction);
+  };
 
-    if(interaction.isButton() && interaction.customId === 'confirmDiscordServerExit') {
-      await discordServerLeaveMakeWebhook({
+  if(interaction.isModalSubmit() && interaction.customId === 'validateEmailId') {
+    const emailInformed = await verifyIfEmailIsValid(interaction);
+
+    if(emailInformed) {
+      await sendToValidateEmailFromMakeWebhook({
         data: {
-          email: null,
+          email: emailInformed,
           member: {
             ...member,
             user: {
@@ -237,42 +215,64 @@ function botApp() {
               tag,
             }
           },
-          command: interaction.commandName
-        }, 
+          command: null
+        },
         interaction,
-        command: `/${discordTexts.server.commands.sair.commandName}`
+        command: null,
       });
-
-      return null;
     }
 
-    // commands
-    if(interaction.isCommand()) {
-      if(interaction.commandName === discordTexts.server.commands.sair.commandName) {
-        const confirmDiscordServerExit = new MessageActionRow()
-        .addComponents(
-          new MessageButton()
-            .setCustomId('confirmDiscordServerExit')
-            .setLabel(replaceToMemberUserTag(discordTexts.server.leave.button.label))
-            .setStyle('PRIMARY'),
-        );
-        
-        await interaction.reply({
-          content: `${interaction.member.user}, deseja mesmo sair do servidor? Clique no botão para sair.`,
-          components: [confirmDiscordServerExit],
-          ephemeral: true
-        });
-      }
-    };
-  });
+    return null;
+  }
 
-  client.login(process.env.DISCORD_BOT_TOKEN);
+  if(interaction.isButton() && interaction.customId === 'confirmDiscordServerExit') {
+    await discordServerLeaveMakeWebhook({
+      data: {
+        email: null,
+        member: {
+          ...member,
+          user: {
+            ...member.user,
+            tag,
+          }
+        },
+        command: interaction.commandName
+      }, 
+      interaction,
+      command: `/${discordTexts.server.commands.sair.commandName}`
+    });
 
-  const log = `[Log]: At [${new Date()}] Discord Bot server started.`
-  const app = express();
-  const port = process.env.PORT || 1323;
+    return null;
+  }
+
+  // commands
+  if(interaction.isCommand()) {
+    if(interaction.commandName === discordTexts.server.commands.sair.commandName) {
+      const confirmDiscordServerExit = new MessageActionRow()
+      .addComponents(
+        new MessageButton()
+          .setCustomId('confirmDiscordServerExit')
+          .setLabel(replaceToMemberUserTag(discordTexts.server.leave.button.label))
+          .setStyle('PRIMARY'),
+      );
+      
+      await interaction.reply({
+        content: `${interaction.member.user}, deseja mesmo sair do servidor? Clique no botão para sair.`,
+        components: [confirmDiscordServerExit],
+        ephemeral: true
+      });
+    }
+  };
+});
+
+const log = `[Log]: At [${new Date()}] Discord Bot server started.`
+const app = express();
+const port = 1323;
+
+async function loadApp() {
+  await client.login(process.env.DISCORD_BOT_TOKEN);
   
   app.listen(port, () => console.log(`${log} on port: ${port}`));
 }
 
-botApp();
+loadApp();
