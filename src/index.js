@@ -80,8 +80,11 @@ async function verifyIfEmailIsValid(interaction) {
   return userEmail;
 }
 
-async function sendToValidateEmailFromMakeWebhook({data, interaction}) {
-  const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, data);
+async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) {
+  const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, {
+    ...data,
+    command,
+  });
   
   const result = webhookResponse.data;
 
@@ -130,8 +133,11 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction}) {
   return null;
 }
 
-async function discordServerLeaveMakeWebhook({data, interaction}) {
-  const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, data);
+async function discordServerLeaveMakeWebhook({data, interaction, command}) {
+  const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, {
+    ...data,
+    command,
+  });
   
   const result = webhookResponse.data;
 
@@ -166,7 +172,7 @@ function botApp() {
       loadVerifyEmailButton(null, channelId);
 
       if(message.deletable) {
-          message.delete();
+        message.delete();
       }
     }
   });
@@ -199,6 +205,7 @@ function botApp() {
           command: interaction.commandName
         }, 
         interaction,
+        command: discordTexts.server.commands.sair.commandName
       });
 
       return null;
@@ -222,7 +229,8 @@ function botApp() {
             member,
             command: null
           },
-          interaction
+          interaction,
+          command: null,
         });
       }
   
