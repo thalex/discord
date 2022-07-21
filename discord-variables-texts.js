@@ -19,7 +19,7 @@ const discordTexts = {
     commands: {
       sair: {
         commandName: 'sair',
-        description: 'Ao executar este comando, você será removido do servidor.'
+        description: 'Ao executar este comando, você será removido do servidor. TESTE'
       }
     }
   },
