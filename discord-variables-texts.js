@@ -13,7 +13,23 @@ const discordTexts = {
       webhook: {
         error: {
           text: '{{user}}, algum erro ocorreu ao você tentar sair do servidor. Tente novamente!'
+        },
+        success: {
+          text: '{{user}}, você será removido do servidor em instantes.'
+        },
+        transactionError: {
+          text: '{{user}}, id do hotmart incorreto'
         }
+      },
+      
+      // Quando clicar no botão sair
+      modal: {
+        title: "Digite o hotmart",
+        leaveInputLabel: "Digite o código hotmart",
+      },
+
+      notFoundValue: {
+        text: '{{user}}, digite um valor no input.'
       }
     },
     commands: {
@@ -21,7 +37,7 @@ const discordTexts = {
         commandName: 'sair',
         description: 'Ao executar este comando, você será removido do servidor. TESTE'
       }
-    }
+    },
   },
   channel: {
     verifyEmailButton: {
@@ -48,7 +64,7 @@ const discordTexts = {
   webHook: {
     success: "{{user}}, seu e-mail foi validado com sucesso.",
 
-    emailExist: "{{user}}, este usuário já está no Discord, caso queira trocar de usuário digite o comando /sair",
+    emailExist: "{{user}}, este usuário já está no Discord, caso queira trocar de usuário digite o comando /sair ou aperte no botão abaixo.",
 
     error: {
       buttons: {
