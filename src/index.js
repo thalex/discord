@@ -279,6 +279,10 @@ client.on('messageCreate', async (message) => {
 });
 
 client.on('interactionCreate', async (interaction) => {
+  if(!interaction) {
+    return null;
+  }
+
   const member = interaction.member;
   let username = '';
   let discriminator = '';
