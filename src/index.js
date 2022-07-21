@@ -87,6 +87,14 @@ async function verifyIfEmailIsValid(interaction) {
 async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) {
   const member = interaction.member.user;
 
+  const rowMessage = new MessageActionRow()
+    .addComponents(
+      new MessageButton()
+        .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.label, member))
+        .setStyle('LINK')
+        .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member))
+  );
+
   try {
     const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, {
       ...data,
@@ -123,10 +131,7 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
               .setCustomId('verifyEmailBtn')
               .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.verifyEmailAgain.label, member))
               .setStyle('PRIMARY'),
-            new MessageButton()
-              .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.label, member))
-              .setStyle('LINK')
-              .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member))
+            rowMessage
           );
   
         await interaction.reply({ 
@@ -142,6 +147,7 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
     await interaction.reply({ 
       content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, member),
       ephemeral: true,
+      components: [rowMessage]
     });
       
     return null;
@@ -149,6 +155,7 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
     await interaction.reply({ 
       content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, member),
       ephemeral: true,
+      components: [rowMessage]
     });
   }
 
@@ -158,6 +165,14 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
 async function discordServerLeaveMakeWebhook({data, interaction, command}) {
   const member = interaction.member.user;
 
+  const rowMessage = new MessageActionRow()
+    .addComponents(
+      new MessageButton()
+        .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.label, member))
+        .setStyle('LINK')
+        .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member))
+  );
+  
   try {
     const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, {
       ...data,
@@ -184,11 +199,13 @@ async function discordServerLeaveMakeWebhook({data, interaction, command}) {
     await interaction.reply({ 
       content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, member),
       ephemeral: true,
+      components: [rowMessage]
     });
   } catch (error) {
     await interaction.reply({ 
       content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, member),
       ephemeral: true,
+      components: [rowMessage]
     });
   }
   return null;
