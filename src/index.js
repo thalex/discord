@@ -181,6 +181,8 @@ async function verifyLeaveInput(interaction) {
 }
 
 async function openLeaveModal(interaction) {
+  const member = interaction.member.user;
+  
   const leaveModalInputLabel = replaceToMemberUserTag(discordTexts.server.leave.modal.leaveInputLabel, member);
   const modalTitle = replaceToMemberUserTag(discordTexts.server.leave.modal.title, member);
 
