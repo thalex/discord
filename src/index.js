@@ -1,6 +1,6 @@
 require("dotenv").config();
 const { default: axios } = require('axios');
-//
+
 const {
   discordTexts, replaceToMemberUserTag
 } = require('../discord-variables-texts');
@@ -32,14 +32,10 @@ async function loadVerifyEmailButton(member, channelIdParam) {
         .setStyle('PRIMARY'),
     );
 
-  const message = await channel.send({ 
+  await channel.send({ 
     content: member ? replaceToMemberUserTag(discordTexts.channel.welcome.text, member) : discordTexts.channel.welcome.text,
     components: [openModalBtn] 
   });
-
-  if(member) {
-    messages.set(member.user.id, message.id);
-  }
 }
 
 async function handleButtonInteraction(interaction) {
@@ -84,11 +80,87 @@ async function verifyIfEmailIsValid(interaction) {
   return userEmail;
 }
 
-const messages = new Map();
+async function sendToValidateEmailFromMakeWebhook({data, interaction}) {
+  const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, data);
+  
+  const result = webhookResponse.data;
+
+  if(result.status) {
+    const status = result.status.toLowerCase();
+
+    if(status === 'success') {
+      await interaction.reply({ 
+        content: replaceToMemberUserTag(discordTexts.webHook.success, data.member),
+        ephemeral: true,
+      });
+
+      return null;
+    }
+  
+    if(status === 'error') {
+      const buttons = new MessageActionRow()
+        .addComponents(
+          new MessageButton()
+            .setCustomId('verifyEmailBtn')
+            .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.verifyEmailAgain.label, member))
+            .setStyle('PRIMARY'),
+          new MessageButton()
+            .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.label, member))
+            .setStyle('LINK')
+            .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member))
+        );
+
+      await interaction.reply({ 
+        content: replaceToMemberUserTag(discordTexts.webHook.error.text, member),
+        ephemeral: true,
+        components: [buttons],
+      });
+
+      return null;
+    }
+
+    await interaction.reply({ 
+      content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, data.member),
+      ephemeral: true,
+    });
+
+    return null;
+  }
+    
+  return null;
+}
+
+async function discordServerLeaveMakeWebhook({data, interaction}) {
+  const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, data);
+  
+  const result = webhookResponse.data;
+
+  if(result.status) {
+    const status = result.status.toLowerCase();
+
+    if(status === 'error') {
+      await interaction.reply({ 
+        content: replaceToMemberUserTag(discordTexts.server.leave.webhook.error.text, interaction.member.user),
+        ephemeral: true,
+      });
+    }
+ 
+    return {
+      status: result.status
+    };
+  }
+    
+  await interaction.reply({ 
+    content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, data.member),
+    ephemeral: true,
+  });
+
+  return null;
+}
 
 function botApp() {
-  client.on('messageCreate', (message) => {
-    const channelId = message.channel.id.user;
+  client.on('messageCreate', async (message) => {
+    const channelId = message.channel.id;
 
     if(message.content === '/load-verify-email-button') {
       loadVerifyEmailButton(null, channelId);
@@ -99,84 +171,68 @@ function botApp() {
     }
   });
 
+  // Commands
   client.on('interactionCreate', async (interaction) => {
-    if (interaction.isButton()) {
+    if(interaction.isCommand()) {
+      if(interaction.commandName === discordTexts.server.commands.sair.commandName) {
+        const confirmDiscordServerExit = new MessageActionRow()
+        .addComponents(
+          new MessageButton()
+            .setCustomId('confirmDiscordServerExit')
+            .setLabel(replaceToMemberUserTag(discordTexts.server.leave.button.label))
+            .setStyle('PRIMARY'),
+        );
+        
+        await interaction.reply({
+          content: `${interaction.member.user}, deseja mesmo sair do servidor? Clique no botão para sair.`,
+          components: [confirmDiscordServerExit],
+          ephemeral: true
+        });
+      }
+    };
+
+    if(interaction.isButton() && interaction.customId === 'confirmDiscordServerExit') {
+      await discordServerLeaveMakeWebhook({
+        data: {
+          email: null,
+          member: interaction.member,
+          command: interaction.commandName
+        }, 
+        interaction,
+      });
+
+      return null;
+    }
+  })
+
+  client.on('interactionCreate', async (interaction) => {
+    if (interaction.customId === 'openModalBtn') {
       return handleButtonInteraction(interaction);
     };
     
-    const member = interaction.member.user;
+    if(interaction.isButton() && interaction.customId !== 'confirmDiscordServerExit') {
+      const member = interaction.member.user;
 
-    const emailInformed = await verifyIfEmailIsValid(interaction);
-
-    if(emailInformed) {
-      const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, {
-        email: emailInformed,
-        member
-      });
-      
-      const result = webhookResponse.data;
-
-      if(result.status) {
-        const status = result.status.toLowerCase();
-
-        if(status === 'success') {
-          await interaction.reply({ 
-            content: replaceToMemberUserTag(discordTexts.webHook.success, member),
-            ephemeral: true,
-          });
-
-          if(messages) {
-            const messageId = messages.get(interaction.user.id);
-
-            if(messageId) {
-              const message = await interaction.channel.messages.fetch(messageId);
-              
-              if (message.deletable) {
-                message.delete()
-              }
-
-              messages.delete(interaction.user.id)
-            }
-          }
-        }
-        
-        if(status === 'error') {
-          const buttons = new MessageActionRow()
-            .addComponents(
-              new MessageButton()
-                .setCustomId('verifyEmailBtn')
-                .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.verifyEmailAgain.label, member))
-                .setStyle('PRIMARY'),
-              new MessageButton()
-                .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.label, member))
-                .setStyle('LINK')
-                .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member))
-            );
-
-          await interaction.reply({ 
-            content: replaceToMemberUserTag(discordTexts.webHook.error.text, member),
-            ephemeral: true,
-            components: [buttons],
-          });
-        }
-
-        return;
+      const emailInformed = await verifyIfEmailIsValid(interaction);
+  
+      if(emailInformed) {
+        await sendToValidateEmailFromMakeWebhook({
+          data: {
+            email: emailInformed,
+            member,
+            command: null
+          },
+          interaction
+        });
       }
-
-      await interaction.reply({ 
-        content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, member),
-        ephemeral: true,
-      });
+  
       return null;
     }
-
-    return null;
   });
 
   client.login(process.env.DISCORD_BOT_TOKEN);
 
   const log = `[Log]: At [${new Date()}] Discord Bot server started.`
-
   const app = express();
   const port = process.env.PORT || 1323;
   
