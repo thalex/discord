@@ -210,7 +210,7 @@ function botApp() {
       return handleButtonInteraction(interaction);
     };
     
-    if(interaction.isButton() && interaction.customId !== 'confirmDiscordServerExit') {
+    if(interaction.isModalSubmit() && interaction.customId === 'validateEmailId') {
       const member = interaction.member.user;
 
       const emailInformed = await verifyIfEmailIsValid(interaction);
