@@ -267,12 +267,12 @@ client.on('interactionCreate', async (interaction) => {
 
 const log = `[Log]: At [${new Date()}] Discord Bot server started.`
 const app = express();
-const port = 1323;
+const port = 5000;
 
 async function loadApp() {
   await client.login(process.env.DISCORD_BOT_TOKEN);
-  
-  app.listen(port, () => console.log(`${log} on port: ${port}`));
+
+  app.listen(process.env.PORT || 5000, () => console.log(`${log} on port: ${port}`));
 }
 
 loadApp();
