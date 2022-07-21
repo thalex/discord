@@ -4,6 +4,25 @@
 // resultado: @tiaguin061#2748, bem vindo ao servidor!
 
 const discordTexts = {
+  server: {
+    leave: {
+      button: {
+        label: 'Sair do servidor'
+      },
+
+      webhook: {
+        error: {
+          text: 'Algum erro ocorreu ao você tentar sair do servidor. Tente novamente!'
+        }
+      }
+    },
+    commands: {
+      sair: {
+        commandName: 'sair',
+        description: 'Ao executar este comando, você será removido do servidor.'
+      }
+    }
+  },
   channel: {
     verifyEmailButton: {
       label: "Liberar meu acesso."
