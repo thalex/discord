@@ -12,7 +12,7 @@ const discordTexts = {
 
       webhook: {
         error: {
-          text: 'Algum erro ocorreu ao você tentar sair do servidor. Tente novamente!'
+          text: '{{user}}, algum erro ocorreu ao você tentar sair do servidor. Tente novamente!'
         }
       }
     },

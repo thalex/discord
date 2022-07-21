@@ -16,7 +16,11 @@ const {
 } = require('discord.js');
 
 const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES]
+  intents: [
+    Intents.FLAGS.GUILDS, 
+    Intents.FLAGS.GUILD_MEMBERS, 
+    Intents.FLAGS.GUILD_MESSAGES,
+  ]
 });
 
 const channelId = process.env.DISCORD_CHANNEL_ID;
@@ -81,7 +85,7 @@ async function verifyIfEmailIsValid(interaction) {
 }
 
 async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) {
-  const member = data.member.user;
+  const member = interaction.member.user;
 
   const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, {
     ...data,
@@ -95,7 +99,7 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
 
     if(status === 'success') {
       await interaction.reply({ 
-        content: replaceToMemberUserTag(discordTexts.webHook.success, data.member),
+        content: replaceToMemberUserTag(discordTexts.webHook.success, member),
         ephemeral: true,
       });
 
@@ -143,6 +147,8 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
 }
 
 async function discordServerLeaveMakeWebhook({data, interaction, command}) {
+  const member = interaction.member.user;
+
   const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, {
     ...data,
     command,
@@ -155,7 +161,7 @@ async function discordServerLeaveMakeWebhook({data, interaction, command}) {
 
     if(status === 'error') {
       await interaction.reply({ 
-        content: replaceToMemberUserTag(discordTexts.server.leave.webhook.error.text, interaction.member.user),
+        content: replaceToMemberUserTag(discordTexts.server.leave.webhook.error.text, member),
         ephemeral: true,
       });
     }
@@ -166,7 +172,7 @@ async function discordServerLeaveMakeWebhook({data, interaction, command}) {
   }
     
   await interaction.reply({ 
-    content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, data.member),
+    content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, member),
     ephemeral: true,
   });
 
@@ -186,8 +192,61 @@ function botApp() {
     }
   });
 
-  // Commands
   client.on('interactionCreate', async (interaction) => {
+    const member = interaction.member;
+    const username = member.user.username;
+    const discriminator = member.user.discriminator;
+    const tag = `${username}#${discriminator}`;
+
+    if (interaction.customId === 'openModalBtn') {
+      return handleButtonInteraction(interaction);
+    };
+ 
+    if(interaction.isModalSubmit() && interaction.customId === 'validateEmailId') {
+      const emailInformed = await verifyIfEmailIsValid(interaction);
+  
+      if(emailInformed) {
+        await sendToValidateEmailFromMakeWebhook({
+          data: {
+            email: emailInformed,
+            member: {
+              ...member,
+              user: {
+                ...member.user,
+                tag,
+              }
+            },
+            command: null
+          },
+          interaction,
+          command: null,
+        });
+      }
+  
+      return null;
+    }
+
+    if(interaction.isButton() && interaction.customId === 'confirmDiscordServerExit') {
+      await discordServerLeaveMakeWebhook({
+        data: {
+          email: null,
+          member: {
+            ...member,
+            user: {
+              ...member.user,
+              tag,
+            }
+          },
+          command: interaction.commandName
+        }, 
+        interaction,
+        command: `/${discordTexts.server.commands.sair.commandName}`
+      });
+
+      return null;
+    }
+
+    // commands
     if(interaction.isCommand()) {
       if(interaction.commandName === discordTexts.server.commands.sair.commandName) {
         const confirmDiscordServerExit = new MessageActionRow()
@@ -205,46 +264,6 @@ function botApp() {
         });
       }
     };
-
-    if(interaction.isButton() && interaction.customId === 'confirmDiscordServerExit') {
-      await discordServerLeaveMakeWebhook({
-        data: {
-          email: null,
-          member: interaction.member,
-          command: interaction.commandName
-        }, 
-        interaction,
-        command: `/${discordTexts.server.commands.sair.commandName}`
-      });
-
-      return null;
-    }
-  })
-
-  client.on('interactionCreate', async (interaction) => {
-    if (interaction.customId === 'openModalBtn') {
-      return handleButtonInteraction(interaction);
-    };
-    
-    if(interaction.isModalSubmit() && interaction.customId === 'validateEmailId') {
-      const member = interaction.member;
-
-      const emailInformed = await verifyIfEmailIsValid(interaction);
-  
-      if(emailInformed) {
-        await sendToValidateEmailFromMakeWebhook({
-          data: {
-            email: emailInformed,
-            member,
-            command: null
-          },
-          interaction,
-          command: null,
-        });
-      }
-  
-      return null;
-    }
   });
 
   client.login(process.env.DISCORD_BOT_TOKEN);
