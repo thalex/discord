@@ -63,6 +63,11 @@ const discordTexts = {
       text: "{{user}}, e-mail não encontrado, tente novamente ou entre em contato com o suporte."
     },
     notFoundStatus: "{{user}}, algum erro ocorreu. Entre em contato com o suporte."
+     },
+        talkToSuport: {
+          label: "Falar com o suporte",
+          link: "https://discord.com"
+        }
   },
 }
 
