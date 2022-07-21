@@ -47,6 +47,9 @@ const discordTexts = {
   // No consumo do webhook da integromat
   webHook: {
     success: "{{user}}, seu e-mail foi validado com sucesso.",
+
+    emailExist: "{{user}}, este usuário já está no Discord, caso queira trocar de usuário digite o comando /sair",
+
     error: {
       buttons: {
         verifyEmailAgain: {
