@@ -111,18 +111,14 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
           content: replaceToMemberUserTag(discordTexts.webHook.success, member),
           ephemeral: true,
         });
-  
-        return null;
       }
   
       if(status === 'id-exist') {
         await interaction.reply({ 
           content: replaceToMemberUserTag(discordTexts.webHook.emailExist, member),
           ephemeral: true,
-          components: [leaveBtnMessage]
+          components: [supportBtnMessage]
         });
-  
-        return null;
       }
     
       if(status === 'error') {
@@ -140,9 +136,9 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
           ephemeral: true,
           components: [buttons],
         });
-
-        return null;
       }
+
+      return null;
     }
     
     await interaction.reply({ 
@@ -153,6 +149,7 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
       
     return null;
   } catch (error) {
+    console.log({error})
     await interaction.reply({ 
       content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, member),
       ephemeral: true,
