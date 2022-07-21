@@ -1,1 +1,1 @@
-web: node src/commands/registerCommand.js && nodemon src/index.ts
+web: node src/commands/registerCommand.js && nodemon src/index.js
