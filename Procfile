@@ -1,1 +1,1 @@
-web: cross-env NODE_ENV=production node src/commands/registerCommand.js && node src/index.js
+web: cross-env NODE_ENV=production node src/commands/registerCommand.js && node src/server.js
