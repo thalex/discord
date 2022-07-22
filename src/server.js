@@ -376,4 +376,4 @@ client.on('interactionCreate', async (interaction) => {
 const log = `[Log]: At [${new Date()}] Discord Bot server started.`
 
 client.login(process.env.DISCORD_BOT_TOKEN);
-console.log(`${log} on port: ${port}`);
+console.log(`${log}`);
