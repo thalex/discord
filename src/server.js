@@ -4,7 +4,6 @@ const { default: axios } = require('axios');
 const {
   discordTexts, replaceToMemberUserTag
 } = require('../discord-variables-texts');
-const express = require("express");
 
 const { 
   MessageButton, 
@@ -374,18 +373,7 @@ client.on('interactionCreate', async (interaction) => {
   };
 });
 
-if (!(process.env.NODE_ENV === 'production')) {
-  process.on('SIGTERM', () => {
-    process.exit();
-  }); 
-}
-
 const log = `[Log]: At [${new Date()}] Discord Bot server started.`
-const app = express();
-const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
-  console.log(`${log} on port: ${port}`)
-  
-  client.login(process.env.DISCORD_BOT_TOKEN);
-});
+client.login(process.env.DISCORD_BOT_TOKEN);
+console.log(`${log} on port: ${port}`);
