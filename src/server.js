@@ -96,13 +96,10 @@ async function verifyIfEmailIsValid(interaction) {
 async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) {
   const member = interaction.member.user;
 
-  const supportBtnMessage = new ActionRowBuilder()
-    .addComponents(
-      new ButtonBuilder()
-        .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.label, member))
-        .setStyle(5)
-        .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member))
-  );
+  const supportBtnMessage = new ButtonBuilder()
+    .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.label, member))
+    .setStyle(5)
+    .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member))
 
   try {
     const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, {
@@ -124,12 +121,12 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
   
       if(status === 'id-exist') {
         const confirmDiscordServerExit = new ActionRowBuilder()
-        .addComponents(
-          new ButtonBuilder()
-            .setCustomId('confirmDiscordServerExit')
-            .setLabel(replaceToMemberUserTag(discordTexts.server.leave.button.label))
-            .setStyle(4),
-        );
+          .addComponents(
+            new ButtonBuilder()
+              .setCustomId('confirmDiscordServerExit')
+              .setLabel(replaceToMemberUserTag(discordTexts.server.leave.button.label))
+              .setStyle(4),
+          );
 
         await interaction.reply({ 
           content: replaceToMemberUserTag(discordTexts.webHook.emailExist, member),
@@ -142,7 +139,7 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
         const buttons = new ActionRowBuilder()
           .addComponents(
             new ButtonBuilder()
-              .setCustomId('verifyEmailBtn')
+              .setCustomId('openModalBuilderBtn')
               .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.verifyEmailAgain.label, member))
               .setStyle(1),
             supportBtnMessage
@@ -162,8 +159,11 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
       ephemeral: true,
       components: [supportBtnMessage]
     });
+    
+    return null;
   } catch (error) {
     console.log({error})
+
     await interaction.reply({ 
       content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, member),
       ephemeral: true,
