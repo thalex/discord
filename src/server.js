@@ -222,7 +222,7 @@ async function discordServerLeaveMakeWebhook({data, interaction, command}) {
       new ButtonBuilder()
         .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.label, member))
         .setStyle(5)
-        .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member))
+        .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member)),
   );
 
   try {
@@ -366,20 +366,41 @@ client.on('interactionCreate', async (interaction) => {
     return null;
   }
 
+  if(interaction.isButton() && interaction.customId === 'serverExitBtn') {
+    await discordServerLeaveMakeWebhook({
+      data: {
+        email: null,
+        member: {
+          ...member,
+          user: {
+            ...member.user,
+            tag,
+          }
+        },
+        command: null,
+        transactionId: null
+      },
+      interaction,
+      command: `/${discordTexts.server.commands.sair.commandName}`,
+    });
+
+    return null;
+  }
+
   // commands
   if(interaction.type === InteractionType.ApplicationCommand) {
     if(interaction.commandName === discordTexts.server.commands.sair.commandName) {
-      const confirmDiscordServerExit = new ActionRowBuilder()
+      const serverExit = new ActionRowBuilder()
       .addComponents(
         new ButtonBuilder()
-          .setCustomId('confirmDiscordServerExit')
+          .setCustomId('serverExitBtn')
           .setLabel(replaceToMemberUserTag(discordTexts.server.leave.button.label))
           .setStyle(4),
       );
-      
+
       await interaction.reply({
         content: `${interaction.member.user}, deseja mesmo sair do servidor? Clique no botão para sair.`,
-        components: [confirmDiscordServerExit],
+        components: [serverExit],
         ephemeral: true
       });
     }
