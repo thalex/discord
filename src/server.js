@@ -6,38 +6,48 @@ const {
 } = require('../discord-variables-texts');
 
 const { 
-  MessageButton, 
-  MessageActionRow, 
-  Modal, 
-  TextInputComponent,
+  ButtonBuilder, 
+  ActionRowBuilder, 
+  ModalBuilder, 
+  TextInputBuilder,
   Client,
-  Intents,
+  GatewayIntentBits,
+  InteractionType
 } = require('discord.js');
 
 const client = new Client({
   intents: [
-    Intents.FLAGS.GUILDS, 
-    Intents.FLAGS.GUILD_MEMBERS, 
-    Intents.FLAGS.GUILD_MESSAGES,
+    GatewayIntentBits.Guilds, 
+    GatewayIntentBits.GuildMessages, 
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.MessageContent,
   ]
 });
+
+/*
+* Primary = 1,
+  Secondary = 2,
+  Success = 3,
+  Danger = 4,
+  Link = 5
+*/
 
 const channelId = process.env.DISCORD_CHANNEL_ID;
 
 async function loadVerifyEmailButton(member, channelIdParam) {
   const channel = client.channels.cache.get(channelIdParam || channelId);
 
-  const openModalBtn = new MessageActionRow()
+  const openModalBuilderBtn = new ActionRowBuilder()
     .addComponents(
-      new MessageButton()
-        .setCustomId('openModalBtn')
+      new ButtonBuilder()
+        .setCustomId('openModalBuilderBtn')
         .setLabel(replaceToMemberUserTag(discordTexts.channel.verifyEmailButton.label))
-        .setStyle('SUCCESS'),
+        .setStyle(3),
     );
 
   await channel.send({ 
     content: member ? replaceToMemberUserTag(discordTexts.channel.welcome.text, member) : discordTexts.channel.welcome.text,
-    components: [openModalBtn] 
+    components: [openModalBuilderBtn] 
   });
 }
 
@@ -47,17 +57,17 @@ async function handleButtonInteraction(interaction) {
   const emailInputLabel = replaceToMemberUserTag(discordTexts.channel.modal.emailInputLabel, user);
   const modalTitle = replaceToMemberUserTag(discordTexts.channel.modal.title, user);
 
-  const modal = new Modal()
-  .setCustomId('validateEmailId')
-  .setTitle(modalTitle);
+  const modal = new ModalBuilder()
+    .setCustomId('validateEmailId')
+    .setTitle(modalTitle);
 
-  const emailInput = new TextInputComponent()
+  const emailInput = new TextInputBuilder()
     .setCustomId('emailInput')
     .setLabel(emailInputLabel) 
-    .setStyle('SHORT')
+    .setStyle(1)
     .setMaxLength(100);
 
-  const emailActionRow = new MessageActionRow().addComponents(emailInput);
+  const emailActionRow = new ActionRowBuilder().addComponents(emailInput);
 
   modal.addComponents(emailActionRow);
 
@@ -86,11 +96,11 @@ async function verifyIfEmailIsValid(interaction) {
 async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) {
   const member = interaction.member.user;
 
-  const supportBtnMessage = new MessageActionRow()
+  const supportBtnMessage = new ActionRowBuilder()
     .addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.label, member))
-        .setStyle('LINK')
+        .setStyle(5)
         .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member))
   );
 
@@ -99,7 +109,7 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
       ...data,
       command,
     });
-    
+
     const result = webhookResponse.data;
   
     if(result.status) {
@@ -113,20 +123,28 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
       }
   
       if(status === 'id-exist') {
+        const confirmDiscordServerExit = new ActionRowBuilder()
+        .addComponents(
+          new ButtonBuilder()
+            .setCustomId('confirmDiscordServerExit')
+            .setLabel(replaceToMemberUserTag(discordTexts.server.leave.button.label))
+            .setStyle(4),
+        );
+
         await interaction.reply({ 
           content: replaceToMemberUserTag(discordTexts.webHook.emailExist, member),
           ephemeral: true,
-          components: [supportBtnMessage]
+          components: [confirmDiscordServerExit]
         });
       }
     
       if(status === 'error') {
-        const buttons = new MessageActionRow()
+        const buttons = new ActionRowBuilder()
           .addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setCustomId('verifyEmailBtn')
               .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.verifyEmailAgain.label, member))
-              .setStyle('PRIMARY'),
+              .setStyle(1),
             supportBtnMessage
           );
   
@@ -136,7 +154,6 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
           components: [buttons],
         });
       }
-
       return null;
     }
     
@@ -145,8 +162,6 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
       ephemeral: true,
       components: [supportBtnMessage]
     });
-      
-    return null;
   } catch (error) {
     console.log({error})
     await interaction.reply({ 
@@ -176,39 +191,37 @@ async function verifyLeaveInput(interaction) {
   return leaveValue;
 }
 
-async function openLeaveModal(interaction) {
+async function openLeaveModalBuilder(interaction) {
   const member = interaction.member.user;
   
-  const leaveModalInputLabel = replaceToMemberUserTag(discordTexts.server.leave.modal.leaveInputLabel, member);
+  const leaveModalBuilderInputLabel = replaceToMemberUserTag(discordTexts.server.leave.modal.leaveInputLabel, member);
   const modalTitle = replaceToMemberUserTag(discordTexts.server.leave.modal.title, member);
 
-  const modal = new Modal()
-  .setCustomId('leaveModalId')
-  .setTitle(modalTitle);
+  const modal = new ModalBuilder()
+    .setCustomId('leaveModalBuilderId')
+    .setTitle(modalTitle);
 
-  const leaveInput = new TextInputComponent()
+  const leaveInput = new TextInputBuilder()
     .setCustomId('leaveInput')
-    .setLabel(leaveModalInputLabel) 
-    .setStyle('SHORT')
+    .setLabel(leaveModalBuilderInputLabel) 
+    .setStyle(1)
     .setMaxLength(100);
 
-  const leaveActionRow = new MessageActionRow().addComponents(leaveInput);
+  const leaveActionRow = new ActionRowBuilder().addComponents(leaveInput);
 
   modal.addComponents(leaveActionRow);
 
-  if(interaction.isButton() && interaction.customId === 'confirmDiscordServerExit') {
-    return interaction.showModal(modal);
-  }
+  return interaction.showModal(modal);
 }
 
 async function discordServerLeaveMakeWebhook({data, interaction, command}) {
   const member = interaction.member.user;
 
-  const rowMessage = new MessageActionRow()
+  const rowMessage = new ActionRowBuilder()
     .addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.label, member))
-        .setStyle('LINK')
+        .setStyle(5)
         .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member))
   );
 
@@ -293,11 +306,11 @@ client.on('interactionCreate', async (interaction) => {
     tag = `${username}#${discriminator}`;
   }
 
-  if (interaction.customId === 'openModalBtn') {
+  if (interaction.customId === 'openModalBuilderBtn') {
     return handleButtonInteraction(interaction);
   };
-
-  if(interaction.isModalSubmit() && interaction.customId === 'validateEmailId') {
+  
+  if(interaction.type === InteractionType.ModalSubmit && interaction.customId === 'validateEmailId') {
     const emailInformed = await verifyIfEmailIsValid(interaction);
 
     if(emailInformed) {
@@ -323,12 +336,12 @@ client.on('interactionCreate', async (interaction) => {
   }
 
   if(interaction.isButton() && interaction.customId === 'confirmDiscordServerExit') {
-    await openLeaveModal(interaction)
+    await openLeaveModalBuilder(interaction)
 
     return null;
   }
 
-  if(interaction.isModalSubmit() && interaction.customId === 'leaveModalId') {
+  if(interaction.type === InteractionType.ModalSubmit && interaction.customId === 'leaveModalBuilderId') {
     const leaveValue = await verifyLeaveInput(interaction);
 
     if(leaveValue) {
@@ -354,14 +367,14 @@ client.on('interactionCreate', async (interaction) => {
   }
 
   // commands
-  if(interaction.isCommand()) {
+  if(interaction.type === InteractionType.ApplicationCommand) {
     if(interaction.commandName === discordTexts.server.commands.sair.commandName) {
-      const confirmDiscordServerExit = new MessageActionRow()
+      const confirmDiscordServerExit = new ActionRowBuilder()
       .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setCustomId('confirmDiscordServerExit')
           .setLabel(replaceToMemberUserTag(discordTexts.server.leave.button.label))
-          .setStyle('DANGER'),
+          .setStyle(4),
       );
       
       await interaction.reply({
