@@ -375,9 +375,6 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 const log = `[Log]: At [${new Date()}] Discord Bot server started.`
-const app = express();
-const port = 5000;
-
 
 if (!(process.env.NODE_ENV === 'production')) {
   process.on('SIGTERM', () => {
@@ -385,8 +382,5 @@ if (!(process.env.NODE_ENV === 'production')) {
   }); 
 }
 
-app.listen(process.env.PORT || 5000, () => {
-  console.log(`${log} on port: ${port}`)
-  
-  return client.login(process.env.DISCORD_BOT_TOKEN);
-});
+client.login(process.env.DISCORD_BOT_TOKEN);
+console.log(`${log}`);
