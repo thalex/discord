@@ -113,9 +113,18 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
       const status = result.status.toLowerCase();
   
       if(status === 'success') {
+        const goToOtherChannel = new ActionRowBuilder()
+          .addComponents(
+            new ButtonBuilder()
+            .setLabel(replaceToMemberUserTag(discordTexts.webHook.redirectAfterSuccess.button.label, member))
+            .setStyle(5)
+            .setURL(replaceToMemberUserTag(discordTexts.webHook.redirectAfterSuccess.button.link, member))
+          );
+
         await interaction.reply({ 
           content: replaceToMemberUserTag(discordTexts.webHook.success, member),
           ephemeral: true,
+          components: [goToOtherChannel]
         });
       }
   
@@ -162,8 +171,6 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
     
     return null;
   } catch (error) {
-    console.log({error})
-
     await interaction.reply({ 
       content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, member),
       ephemeral: true,

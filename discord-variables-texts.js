@@ -62,6 +62,16 @@ const discordTexts = {
 
   // No consumo do webhook da integromat
   webHook: {
+    redirectAfterSuccess: {
+      // channel id = 999627060047777842
+      // server id = 999627063625527370
+      // https://discord.com/channels/CHANNEL_ID/SERVER_ID
+      button: {
+        label: 'Canal de Boas vindas',
+        link: 'https://discord.com/channels/999627060047777842/999627063625527370'
+      }
+    },
+
     success: "{{user}}, seu e-mail foi validado com sucesso.",
 
     emailExist: "{{user}}, este usuário já está no Discord, caso queira trocar de usuário digite o comando /sair ou aperte no botão abaixo.",
