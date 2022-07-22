@@ -16,8 +16,8 @@
   },
   "type": "commonjs",
   "scripts": {
-    "dev": "nodemon src/server.ts",
-    "start": "node src/commands/registerCommand.js && node src/server.ts",
+    "dev": "nodemon src/server.js",
+    "start": "node src/commands/registerCommand.js && node src/server.js",
     "dc-registerCommands": "node src/commands/registerCommand.js"
   }
 }
