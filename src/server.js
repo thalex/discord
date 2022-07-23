@@ -401,12 +401,12 @@ client.on('interactionCreate', async (interaction) => {
       .addComponents(
         new ButtonBuilder()
           .setCustomId('serverExitBtn')
-          .setLabel(replaceToMemberUserTag(discordTexts.server.leave.button.label))
+          .setLabel(replaceToMemberUserTag(discordTexts.server.leave.button.label, member))
           .setStyle(4),
       );
 
       await interaction.reply({
-        content: discordTexts.server.leave.text,
+        content: replaceToMemberUserTag(discordTexts.server.leave.text, member),
         components: [serverExit],
         ephemeral: true
       });
