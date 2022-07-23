@@ -15,7 +15,9 @@ const discordTexts = {
         error: {
           text: '{{user}}, ocorreu um erro bizarro ao você tentar sair do servidor, tente novamente ou entre em contato com o suporte.',
           buttons: {
-            
+            verifyEmailAgain: {
+              label: "TENTAR NOVAMENTE"
+            },
             talkToSuport: {
               label: "FALAR COM O SUPORTE",
               link: "https://api.whatsapp.com/send?phone=+12793001001&text=preciso%20de%20ajuda%20com%20o%20Discord!"
