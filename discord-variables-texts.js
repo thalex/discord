@@ -13,7 +13,7 @@ const discordTexts = {
       },
       webhook: {
         error: {
-          text: '{{user}}, algum erro ocorreu ao você tentar sair do servidor. Tente novamente!',
+          text: '{{user}}, ocorreu um erro bizarro ao você tentar sair do servidor, tente novamente ou entre em contato com o suporte.',
           buttons: {
             verifyEmailAgain: {
               label: "TENTAR NOVAMENTE"
