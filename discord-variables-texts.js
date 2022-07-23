@@ -126,7 +126,7 @@ const discordTexts = {
       
       buttons: {
         verifyEmailAgain: {
-          label: "VERIFICAR NOVAMENTE"
+          label: "TENTAR NOVAMENTE"
         },
         talkToSuport: {
           label: "FALAR COM O SUPORTE",
@@ -136,11 +136,11 @@ const discordTexts = {
     },
 
     notFoundStatus: {
-      text: "{{user}}, algum erro ocorreu. Entre em contato com o suporte.",
+      text: "{{user}}, número de transação inválido, tente novamente ou entre em contato com o suporte.",
       buttons: {
         talkToSuport: {
           label: "FALAR COM O SUPORTE",
-          link: "https://discord.com"
+          link: "https://api.whatsapp.com/send?phone=+12793001001&text=preciso%20de%20ajuda%20com%20o%20Discord!"
         }
       },
     }
