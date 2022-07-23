@@ -24,8 +24,8 @@ const discordTexts = {
       
       // Quando clicar no botão sair
       modal: {
-        title: "Digite o hotmart",
-        leaveInputLabel: "Digite o código hotmart",
+        title: "NÚMERO DA TRANSAÇÃO",
+        leaveInputLabel: "Digite o número da transação da Hotmart, EX: HPXXXXXXXXXXXXXX",
       },
 
       notFoundValue: {
@@ -41,7 +41,7 @@ const discordTexts = {
   },
   channel: {
     verifyEmailButton: {
-      label: "Liberar meu acesso."
+      label: "LIBERAR MEU ACESSO"
     },
 
     // A mensagem junto com o botão na hora que o usuário entra no servidor
@@ -53,7 +53,7 @@ const discordTexts = {
 
     // aquele popup para perguntar o e-mail
     modal: {
-      title: "Validação de e-mail",
+      title: "VALIDAÇÃO DE E-MAIL",
       emailInputLabel: "Digite seu e-mail de compra da hotmart",
     },
   },
@@ -67,22 +67,22 @@ const discordTexts = {
       // server id = 999627063625527370
       // https://discord.com/channels/CHANNEL_ID/SERVER_ID
       button: {
-        label: 'Canal de Boas vindas',
+        label: 'CANAL DE BOAS-VINDAS',
         link: 'https://discord.com/channels/999627060047777842/999627063625527370'
       }
     },
 
-    success: "{{user}}, seu e-mail foi validado com sucesso.",
+    success: "{{user}}, acesso liberado, aperte no botão abaixo para ir pro canal de boas-vindas.",
 
-    emailExist: "{{user}}, este usuário já está no Discord, caso queira trocar de usuário digite o comando /sair ou aperte no botão abaixo.",
+    emailExist: "{{user}}, este aluno já está no Discord, tente novamente ou fale com o suporte",
 
     error: {
       buttons: {
         verifyEmailAgain: {
-          label: "Verificar novamente"
+          label: "VERIFICAR NOVAMENTE"
         },
         talkToSuport: {
-          label: "Falar com o suporte",
+          label: "FALAR COM O SUPORTE",
           link: "https://discord.com"
         }
       },
