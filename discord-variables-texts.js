@@ -7,7 +7,7 @@ const discordTexts = {
   server: {
     leave: {
       button: {
-        label: 'Sair do servidor'
+        label: 'SAIR DO SERVIDOR'
       },
       text: "{{user}}, deseja mesmo sair do servidor? Clique no botão para sair.",
 
@@ -25,8 +25,8 @@ const discordTexts = {
       
       // Quando clicar no botão sair
       modal: {
-        title: "Digite o hotmart",
-        leaveInputLabel: "Digite o código hotmart",
+        title: "VERIFICAÇÃO",
+        leaveInputLabel: "Digite o número da transação da Hotmart 👇",
       },
 
       notFoundValue: {
@@ -42,7 +42,7 @@ const discordTexts = {
   },
   channel: {
     verifyEmailButton: {
-      label: "Liberar meu acesso."
+      label: "LIBERAR MEU ACESSO"
     },
 
     // A mensagem junto com o botão na hora que o usuário entra no servidor
@@ -54,8 +54,8 @@ const discordTexts = {
 
     // aquele popup para perguntar o e-mail
     modal: {
-      title: "Validação de e-mail",
-      emailInputLabel: "Digite seu e-mail de compra da hotmart",
+      title: "VERIFICAÇÃO",
+      emailInputLabel: "Digite seu e-mail de compra da hotmart 👇",
     },
   },
   
@@ -68,22 +68,22 @@ const discordTexts = {
       // server id = 999627063625527370
       // https://discord.com/channels/CHANNEL_ID/SERVER_ID
       button: {
-        label: 'Canal de Boas vindas',
+        label: 'CANAL DE BOAS-VINDAS',
         link: 'https://discord.com/channels/999627060047777842/999627063625527370'
       }
     },
 
-    success: "{{user}}, seu e-mail foi validado com sucesso.",
+    success: "{{user}}, acesso liberado! Aperte no botão abaixo para ir pro canal de boas-vindas.",
 
-    emailExist: "{{user}}, este usuário já está no Discord, caso queira trocar de usuário digite o comando /sair ou aperte no botão abaixo.",
+    emailExist: "{{user}}, este aluno já está no Discord, aperte no botão abaixo para removê-lo e depois entre novamente através do seu link de convite.",
 
     error: {
       buttons: {
         verifyEmailAgain: {
-          label: "Verificar novamente"
+          label: "VERIFICAR NOVAMENTE"
         },
         talkToSuport: {
-          label: "Falar com o suporte",
+          label: "FALAR COM O SUPORTE",
           link: "https://discord.com"
         }
       },
