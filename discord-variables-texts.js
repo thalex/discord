@@ -16,11 +16,11 @@ const discordTexts = {
           text: '{{user}}, algum erro ocorreu ao você tentar sair do servidor. Tente novamente!',
           buttons: {
             verifyEmailAgain: {
-              label: "VERIFICAR NOVAMENTE"
+              label: "TENTAR NOVAMENTE"
             },
             talkToSuport: {
               label: "FALAR COM O SUPORTE",
-              link: "https://discord.com"
+              link: "https://api.whatsapp.com/send?phone=+12793001001&text=preciso%20de%20ajuda%20com%20o%20Discord!"
             }
           },
         },
@@ -54,7 +54,7 @@ const discordTexts = {
       notFoundStatus: {
         buttons: {
           verifyEmailAgain: {
-            label: 'TENTAR REMOVER NOVAMENTE'
+            label: 'TENTAR NOVAMENTE'
           }
         }
       }
@@ -86,14 +86,14 @@ const discordTexts = {
   },
   
   emailFormatedNotValidError: {
-    text: `{{user}}, digite um formato de e-mail válido.`,
+    text: `{{user}}, esse e-mail não é valido, aperte no botão abaixo para tentar novamente.`,
     buttons: {
       verifyEmailAgain: {
-        label: "VERIFICAR NOVAMENTE"
+        label: "TENTAR NOVAMENTE"
       },
       talkToSuport: {
         label: "FALAR COM O SUPORTE",
-        link: "https://discord.com"
+        link: "https://api.whatsapp.com/send?phone=+12793001001&text=preciso%20de%20ajuda%20com%20o%20Discord!"
       }
     },
   },
