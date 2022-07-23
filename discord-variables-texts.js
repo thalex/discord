@@ -122,7 +122,7 @@ const discordTexts = {
         },
         talkToSuport: {
           label: "FALAR COM O SUPORTE",
-          link: "https://discord.com"
+          link: "https://api.whatsapp.com/send?phone=+12793001001&text=preciso%20de%20ajuda%20com%20o%20Discord!"
         }
       },
     },
