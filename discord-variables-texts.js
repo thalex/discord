@@ -49,6 +49,14 @@ const discordTexts = {
 
       notFoundValue: {
         text: '{{user}}, digite um valor no input.'
+      },
+
+      notFoundStatus: {
+        buttons: {
+          verifyEmailAgain: {
+            label: 'TENTAR REMOVER NOVAMENTE'
+          }
+        }
       }
     },
     commands: {

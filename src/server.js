@@ -242,6 +242,15 @@ async function discordServerLeaveMakeWebhook({data, interaction, command}) {
   const rowMessage = new ActionRowBuilder()
     .addComponents(
       new ButtonBuilder()
+        .setStyle(1)
+        .setCustomId('confirmDiscordServerExit')
+        .setLabel(
+          replaceToMemberUserTag(
+            discordTexts.server.leave.notFoundStatus.buttons.verifyEmailAgain.label, 
+            member
+          )
+        ),
+      new ButtonBuilder()
         .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.label, member))
         .setStyle(5)
         .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member)),
