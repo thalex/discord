@@ -24,7 +24,7 @@ const discordTexts = {
       
       // Quando clicar no botão sair
       modal: {
-        title: "NÚMERO DA TRANSAÇÃO",
+        title: "HOTMART ID",
         leaveInputLabel: "Digite o número da transação da Hotmart 👇",
       },
 
