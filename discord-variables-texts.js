@@ -9,6 +9,7 @@ const discordTexts = {
       button: {
         label: 'Sair do servidor'
       },
+      text: "{{user}}, deseja mesmo sair do servidor? Clique no botão para sair.",
 
       webhook: {
         error: {

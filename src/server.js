@@ -406,7 +406,7 @@ client.on('interactionCreate', async (interaction) => {
       );
 
       await interaction.reply({
-        content: `${interaction.member.user}, deseja mesmo sair do servidor? Clique no botão para sair.`,
+        content: discordTexts.server.leave.text,
         components: [serverExit],
         ephemeral: true
       });
