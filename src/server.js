@@ -97,7 +97,7 @@ async function verifyIfEmailIsValid(interaction) {
       );
 
     await interaction.reply({ 
-      content: replaceToMemberUserTag(discordTexts.emailFormatedNotValidError, member), 
+      content: replaceToMemberUserTag(discordTexts.emailFormatedNotValidError.text, member), 
       ephemeral: true,
       components: [buttons] 
     });
@@ -179,7 +179,7 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
     }
     
     await interaction.reply({ 
-      content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, member),
+      content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus.text, member),
       ephemeral: true,
       components: [supportBtnMessage]
     });
@@ -187,7 +187,7 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
     return null;
   } catch (error) {
     await interaction.reply({ 
-      content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, member),
+      content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus.text, member),
       ephemeral: true,
       components: [supportBtnMessage]
     });
@@ -290,7 +290,12 @@ async function discordServerLeaveMakeWebhook({data, interaction, command}) {
           .addComponents(
             new ButtonBuilder()
               .setCustomId('confirmDiscordServerExit')
-              .setLabel(replaceToMemberUserTag(discordTexts.webHook.transactionError.buttons.verifyEmailAgain.label, member))
+              .setLabel(
+                replaceToMemberUserTag(
+                  discordTexts.server.leave.webhook.transactionError.buttons.verifyEmailAgain.label, 
+                  member
+                  )
+                )
               .setStyle(1),
             new ButtonBuilder()
               .setLabel(
@@ -321,13 +326,13 @@ async function discordServerLeaveMakeWebhook({data, interaction, command}) {
     }
 
     await interaction.reply({ 
-      content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, member),
+      content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus.text, member),
       ephemeral: true,
       components: [rowMessage]
     });
   } catch (error) {
     await interaction.reply({ 
-      content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus, member),
+      content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus.text, member),
       ephemeral: true,
       components: [rowMessage]
     });
