@@ -79,12 +79,27 @@ async function verifyIfEmailIsValid(interaction) {
 
   const emailRegex = /\S+@\S+.\S+/;
 
-  const user = interaction.member.user;
+  const member = interaction.member.user;
 
   if(!emailRegex.test(userEmail)) {
-    interaction.reply({ 
-      content: replaceToMemberUserTag(discordTexts.emailFormatedNotValidError, user), 
-      ephemeral: true 
+    const supportBtnMessage = new ButtonBuilder()
+      .setLabel(replaceToMemberUserTag(discordTexts.emailFormatedNotValidError.buttons.talkToSuport.label, member))
+      .setStyle(5)
+      .setURL(replaceToMemberUserTag(discordTexts.emailFormatedNotValidError.buttons.talkToSuport.link, member))
+
+    const buttons = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setCustomId('openModalBuilderBtn')
+          .setLabel(replaceToMemberUserTag(discordTexts.emailFormatedNotValidError.buttons.verifyEmailAgain.label, member))
+          .setStyle(1),
+        supportBtnMessage
+      );
+
+    await interaction.reply({ 
+      content: replaceToMemberUserTag(discordTexts.emailFormatedNotValidError, member), 
+      ephemeral: true,
+      components: [buttons] 
     });
 
     return false;
@@ -122,7 +137,7 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
           );
 
         await interaction.reply({ 
-          content: replaceToMemberUserTag(discordTexts.webHook.success, member),
+          content: replaceToMemberUserTag(discordTexts.webHook.success.text, member),
           ephemeral: true,
           components: [goToOtherChannel]
         });
@@ -133,12 +148,12 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
           .addComponents(
             new ButtonBuilder()
               .setCustomId('confirmDiscordServerExit')
-              .setLabel(replaceToMemberUserTag(discordTexts.server.leave.button.label))
+              .setLabel(replaceToMemberUserTag(discordTexts.webHook.emailExist.button.label))
               .setStyle(4),
           );
 
         await interaction.reply({ 
-          content: replaceToMemberUserTag(discordTexts.webHook.emailExist, member),
+          content: replaceToMemberUserTag(discordTexts.webHook.emailExist.text, member),
           ephemeral: true,
           components: [confirmDiscordServerExit]
         });
@@ -251,16 +266,52 @@ async function discordServerLeaveMakeWebhook({data, interaction, command}) {
       }
 
       if(status === 'error') {
+        const rowMessage = new ActionRowBuilder()
+          .addComponents(
+            new ButtonBuilder()
+              .setCustomId('confirmDiscordServerExit')
+              .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.verifyEmailAgain.label, member))
+              .setStyle(1),
+            new ButtonBuilder()
+              .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.label, member))
+              .setStyle(5)
+              .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member)),
+        );
+        
         await interaction.reply({ 
           content: replaceToMemberUserTag(discordTexts.server.leave.webhook.error.text, member),
           ephemeral: true,
+          components: [rowMessage]
         });
       }
 
-      if(status === 'leave-transaction-error') {
+      if(status === 'leave-transaction-error') {  
+        const rowMessage = new ActionRowBuilder()
+          .addComponents(
+            new ButtonBuilder()
+              .setCustomId('confirmDiscordServerExit')
+              .setLabel(replaceToMemberUserTag(discordTexts.webHook.transactionError.buttons.verifyEmailAgain.label, member))
+              .setStyle(1),
+            new ButtonBuilder()
+              .setLabel(
+                replaceToMemberUserTag(
+                  discordTexts.server.leave.webhook.transactionError.buttons.verifyEmailAgain.label, 
+                  member
+                )
+              )
+              .setStyle(5)
+              .setURL(replaceToMemberUserTag(
+                replaceToMemberUserTag(
+                  discordTexts.server.leave.webhook.transactionError.buttons.talkToSuport.label, 
+                  member
+                )
+              )),
+        );
+
         await interaction.reply({ 
           content: replaceToMemberUserTag(discordTexts.server.leave.webhook.transactionError.text, member),
           ephemeral: true,
+          components: [rowMessage]
         });
       }
 

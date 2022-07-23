@@ -6,20 +6,38 @@
 const discordTexts = {
   server: {
     leave: {
+      text: '{{user}}, deseja mesmo sair do servidor? Aperte no botão abaixo para sair.',
+
       button: {
         label: 'SAIR DO SERVIDOR'
       },
-      text: '{{user}}, deseja mesmo sair do servidor? Aperte no botão abaixo para sair.',
-
       webhook: {
         error: {
-          text: '{{user}}, algum erro ocorreu ao você tentar sair do servidor. Tente novamente!'
+          text: '{{user}}, algum erro ocorreu ao você tentar sair do servidor. Tente novamente!',
+          buttons: {
+            verifyEmailAgain: {
+              label: "VERIFICAR NOVAMENTE"
+            },
+            talkToSuport: {
+              label: "FALAR COM O SUPORTE",
+              link: "https://discord.com"
+            }
+          },
         },
         success: {
           text: '{{user}}, você será removido do servidor em instantes.'
         },
         transactionError: {
-          text: '{{user}}, id do hotmart incorreto'
+          text: '{{user}}, id do hotmart incorreto',
+          buttons: {
+            verifyEmailAgain: {
+              label: "VERIFICAR NOVAMENTE"
+            },
+            talkToSuport: {
+              label: "FALAR COM O SUPORTE",
+              link: "https://discord.com"
+            }
+          },
         }
       },
       
@@ -59,7 +77,18 @@ const discordTexts = {
     },
   },
   
-  emailFormatedNotValidError: `{{user}}, digite um formato de e-mail válido.`,
+  emailFormatedNotValidError: {
+    text: `{{user}}, digite um formato de e-mail válido.`,
+    buttons: {
+      verifyEmailAgain: {
+        label: "VERIFICAR NOVAMENTE"
+      },
+      talkToSuport: {
+        label: "FALAR COM O SUPORTE",
+        link: "https://discord.com"
+      }
+    },
+  },
 
   // No consumo do webhook da integromat
   webHook: {
@@ -73,11 +102,20 @@ const discordTexts = {
       }
     },
 
-    success: "{{user}}, acesso liberado! Aperte no botão abaixo para ir pro canal de boas-vindas.",
+    success: {
+      text: "{{user}}, acesso liberado! Aperte no botão abaixo para ir pro canal de boas-vindas.",
+    },
 
-    emailExist: "{{user}}, este aluno já está no Discord, aperte no botão abaixo para removê-lo e depois entre novamente através do seu link de convite.",
+    emailExist: {
+      text: "{{user}}, este aluno já está no Discord, aperte no botão abaixo para removê-lo e depois entre novamente através do seu link de convite.",
+      button: {
+        label: 'SAIR DO SERVIDOR'
+      },
+    },
 
     error: {
+      text: "{{user}}, e-mail não encontrado, tente novamente ou entre em contato com o suporte.",
+      
       buttons: {
         verifyEmailAgain: {
           label: "VERIFICAR NOVAMENTE"
@@ -87,9 +125,17 @@ const discordTexts = {
           link: "https://discord.com"
         }
       },
-      text: "{{user}}, e-mail não encontrado, tente novamente ou entre em contato com o suporte."
     },
-    notFoundStatus: "{{user}}, algum erro ocorreu. Entre em contato com o suporte."
+
+    notFoundStatus: {
+      text: "{{user}}, algum erro ocorreu. Entre em contato com o suporte.",
+      buttons: {
+        talkToSuport: {
+          label: "FALAR COM O SUPORTE",
+          link: "https://discord.com"
+        }
+      },
+    }
   },
 }
 
