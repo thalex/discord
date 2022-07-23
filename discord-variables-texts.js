@@ -107,9 +107,9 @@ const discordTexts = {
     },
 
     emailExist: {
-      text: "{{user}}, este aluno já está no Discord, aperte no botão abaixo para removê-lo e depois entre novamente através do seu link de convite.",
+      text: "{{user}}, este aluno já está no Discord, aperte no botão abaixo para removê-lo e depois entre novamente através do link de convite.",
       button: {
-        label: 'SAIR DO SERVIDOR'
+        label: 'REMOVER ALUNO'
       },
     },
 
