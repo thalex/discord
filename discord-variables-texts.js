@@ -74,7 +74,7 @@ const discordTexts = {
 
     success: "{{user}}, acesso liberado, aperte no botão abaixo para ir pro canal de boas-vindas.",
 
-    emailExist: "{{user}}, este aluno já está no Discord, tente novamente ou fale com o suporte",
+    emailExist: "{{user}}, este aluno já está no Discord, aperte no botão abaixo para removê-lo e depois entre novamente",
 
     error: {
       buttons: {
