@@ -24,7 +24,7 @@ const discordTexts = {
       
       // Quando clicar no botão sair
       modal: {
-        title: "HOTMART ID",
+        title: "VERIFICAÇÃO",
         leaveInputLabel: "Digite o número da transação da Hotmart 👇",
       },
 
@@ -53,8 +53,8 @@ const discordTexts = {
 
     // aquele popup para perguntar o e-mail
     modal: {
-      title: "VALIDAÇÃO DE E-MAIL",
-      emailInputLabel: "Digite seu e-mail de compra da hotmart",
+      title: "VERIFICAÇÃO",
+      emailInputLabel: "Digite seu e-mail de compra da hotmart 👇",
     },
   },
   
@@ -74,7 +74,7 @@ const discordTexts = {
 
     success: "{{user}}, acesso liberado, aperte no botão abaixo para ir pro canal de boas-vindas.",
 
-    emailExist: "{{user}}, este aluno já está no Discord, aperte no botão abaixo para removê-lo e depois entre novamente",
+    emailExist: "{{user}}, este aluno já está no Discord, aperte no botão abaixo para removê-lo e depois entre novamente através do seu link de convite.",
 
     error: {
       buttons: {
