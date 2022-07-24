@@ -42,7 +42,7 @@ const discordTexts = {
       // Quando clicar no botão sair
       modal: {
         title: "VERIFICAÇÃO",
-        leaveInputLabel: "Digite o número da transação da Hotmart 👇",
+        leaveInputLabel: "Digite o código de transação da Hotmart 👇",
       },
 
       notFoundValue: {
@@ -133,7 +133,7 @@ const discordTexts = {
     },
     // 1.4 - Número de transação da hotmart inválido..
     notFoundStatus: {
-      text: "{{user}}, número de transação inválido, tente novamente ou entre em contato com o suporte.",
+      text: "{{user}}, código de transação inválido, tente novamente ou entre em contato com o suporte.",
       buttons: {
         talkToSuport: {
           label: "FALAR COM O SUPORTE",
