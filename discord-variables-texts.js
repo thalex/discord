@@ -106,7 +106,7 @@ const discordTexts = {
         link: 'https://discord.com/channels/999627060047777842/999627063625527370'
       }
     },
-
+    // 1.5 - Digitou o e-mail corretamente e o acesso foi liberado
     success: {
       text: "{{user}}, acesso liberado! Aperte no botão abaixo para ir pro canal de boas-vindas.",
     },
@@ -114,7 +114,7 @@ const discordTexts = {
     emailExist: {
       text: "{{user}}, já existe uma conta com esse e-mail dentro da comunidade no Discord, aperte no botão abaixo para removê-lo e depois entre novamente através do link de convite.",
       button: {
-        label: 'REMOVER ALUNO'
+        label: 'REMOVER ACESSO'
       },
     },
 
@@ -131,7 +131,7 @@ const discordTexts = {
         }
       },
     },
-
+    // 1.4 - Número de transação da hotmart inválido..
     notFoundStatus: {
       text: "{{user}}, número de transação inválido, tente novamente ou entre em contato com o suporte.",
       buttons: {
