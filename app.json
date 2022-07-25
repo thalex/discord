@@ -9,15 +9,19 @@
     "Javascript"
   ],
 
-  "environments": {
-    "test": {
-      "env": {
-        "DISCORD_CHANNEL_ID": "999155393907400846",
-        "DISCORD_BOT_TOKEN": "ODYyNzkwNjkxNDAyMDIyOTMy.GlA9LC.guex0Za-Dg944MQDibxS0QcEfNJKjKvJumzaRE",
-        "DISCORD_BOT_ID": "862790691402022932",
+  "env": {
+    "DISCORD_CHANNEL_ID": {
+      "value": "999155393907400846"
+    },
+    "DISCORD_BOT_TOKEN": {
+      "value": "ODYyNzkwNjkxNDAyMDIyOTMy.GlA9LC.guex0Za-Dg944MQDibxS0QcEfNJKjKvJumzaRE"
+    },
+    "DISCORD_BOT_ID": {
+      "value": "862790691402022932"
+    },
 
-        "MAKE_WEBHOOK_URL": "https://"
-      }
+    "MAKE_WEBHOOK_URL": {
+      "value": "https://"
     }
   }
 }
