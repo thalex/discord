@@ -1,5 +1,23 @@
 {
   "name": "Discord bot",
   "description": "A discord bot description",
-  "repository": "https://github.com/Tiaguin061/discord-bot-1"
+  "repository": "https://github.com/Tiaguin061/discord-bot-1",
+
+  "keywords": [
+    "Discord.js Libary",
+    "Node Js",
+    "Javascript"
+  ],
+
+  "environments": {
+    "test": {
+      "env": {
+        "DISCORD_CHANNEL_ID": "999155393907400846",
+        "DISCORD_BOT_TOKEN": "ODYyNzkwNjkxNDAyMDIyOTMy.GlA9LC.guex0Za-Dg944MQDibxS0QcEfNJKjKvJumzaRE",
+        "DISCORD_BOT_ID": "862790691402022932",
+
+        "MAKE_WEBHOOK_URL": "https://"
+      }
+    }
+  }
 }
