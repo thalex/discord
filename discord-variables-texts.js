@@ -1,8 +1,9 @@
 // Use {{user}} para que no código substitua este valor pelo @usuario#tag
 // exemplo:
 // variavel: `{{user}}, bem vindo ao servidor!`
-// resultado: @tiaguin061#2748, bem vindo ao servidor!
+// resultado: @thales#1234, bem vindo ao servidor!
 
+// 1.X - Sair do Servidor
 const discordTexts = {
   server: {
     leave: {
@@ -13,7 +14,7 @@ const discordTexts = {
       },
       webhook: {
         error: {
-          text: '{{user}}, ocorreu um erro bizarro ao você tentar sair do servidor, tente novamente ou entre em contato com o suporte.',
+          text: '{{user}}, ocorreu um erro sinistro ao você tentar sair do servidor, entre em contato com o suporte.',
           buttons: {
             talkToSuport: {
               label: "FALAR COM O SUPORTE",
@@ -41,7 +42,7 @@ const discordTexts = {
       // Quando clicar no botão sair
       modal: {
         title: "VERIFICAÇÃO",
-        leaveInputLabel: "Digite o número da transação da Hotmart 👇",
+        leaveInputLabel: "Digite o código de transação da Hotmart 👇",
       },
 
       notFoundValue: {
@@ -63,16 +64,15 @@ const discordTexts = {
       }
     },
   },
+  // 1.1 - Botão de liberação do acesso após entrar no servidor.
   channel: {
     verifyEmailButton: {
       label: "LIBERAR MEU ACESSO"
     },
 
-    // A mensagem junto com o botão na hora que o usuário entra no servidor
+    // 1.0 - Entra no servidor, aperta no botão para liberar o acesso e digita o e-mail para confirmar sua entrada.
     welcome: {
-      text: `
-        Seja bem vindo à Comunidade de Automação, aperte no botão abaixo para confirmar seu e-mail e liberar seu acesso.
-      `
+      text: `Seja bem vindo à Comunidade de Automação, aperte no botão abaixo para confirmar seu e-mail e liberar seu acesso.`
     },
 
     // aquele popup para perguntar o e-mail
@@ -81,7 +81,7 @@ const discordTexts = {
       emailInputLabel: "Digite seu e-mail de compra da hotmart 👇",
     },
   },
-  
+  // 1.2 - Caso digite o e-mail em um formato inválido
   emailFormatedNotValidError: {
     text: `{{user}}, esse e-mail não é valido, aperte no botão abaixo para tentar novamente.`,
     buttons: {
@@ -106,15 +106,15 @@ const discordTexts = {
         link: 'https://discord.com/channels/999627060047777842/999627063625527370'
       }
     },
-
+    // 1.5 - Digitou o e-mail corretamente e o acesso foi liberado
     success: {
       text: "{{user}}, acesso liberado! Aperte no botão abaixo para ir pro canal de boas-vindas.",
     },
-
+    // 1.3 - Se o aluno já tiver no servidor, ele vai pedir o número de transação da hotmart para confirmação.
     emailExist: {
-      text: "{{user}}, este aluno já está no Discord, aperte no botão abaixo para removê-lo e depois entre novamente através do link de convite.",
+      text: "{{user}}, já existe uma conta com esse e-mail dentro da comunidade no Discord, aperte no botão abaixo para removê-lo e depois entre novamente através do link de convite.",
       button: {
-        label: 'REMOVER ALUNO'
+        label: 'REMOVER ACESSO'
       },
     },
 
@@ -131,9 +131,9 @@ const discordTexts = {
         }
       },
     },
-
+    // 1.4 - Número de transação da hotmart inválido..
     notFoundStatus: {
-      text: "{{user}}, número de transação inválido, tente novamente ou entre em contato com o suporte.",
+      text: "{{user}}, código de transação inválido, tente novamente ou entre em contato com o suporte.",
       buttons: {
         talkToSuport: {
           label: "FALAR COM O SUPORTE",
