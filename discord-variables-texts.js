@@ -33,7 +33,7 @@ const discordTexts = {
             },
             talkToSuport: {
               label: "FALAR COM O SUPORTE",
-              link: "https://discord.com"
+              link: "https://api.whatsapp.com/send?phone=+12793001001&text=preciso%20de%20ajuda%20com%20o%20Discord!"
             }
           },
         }
@@ -72,7 +72,7 @@ const discordTexts = {
 
     // 1.0 - Entra no servidor, aperta no botão para liberar o acesso e digita o e-mail para confirmar sua entrada.
     welcome: {
-      text: `Seja bem vindo à Comunidade de Automação, aperte no botão abaixo para confirmar seu e-mail e liberar seu acesso.`
+      text: `Seja muito bem-vindo(a) à Comunidade de Automação, aperte no botão abaixo para confirmar seu e-mail e liberar seu acesso.`
     },
 
     // aquele popup para perguntar o e-mail
