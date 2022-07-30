@@ -103,7 +103,7 @@ const discordTexts = {
       // https://discord.com/channels/CHANNEL_ID/SERVER_ID
       button: {
         label: 'CANAL DE BOAS-VINDAS',
-        link: 'https://discord.com/channels/999627060047777842/999627063625527370'
+        link: 'https://ptb.discord.com/channels/952631809269727292/952631809269727295'
       }
     },
     // 1.5 - Digitou o e-mail corretamente e o acesso foi liberado
