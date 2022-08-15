@@ -3,7 +3,7 @@
 // variavel: `{{user}}, bem vindo ao servidor!`
 // resultado: @thales#1234, bem vindo ao servidor!
 
-// 1.X - Sair do Servidor
+// 8.1 - Sair do Servidor
 const discordTexts = {
   server: {
     leave: {
@@ -81,7 +81,7 @@ const discordTexts = {
       emailInputLabel: "Digite seu e-mail de compra da hotmart 👇",
     },
   },
-  // 1.2 - Caso digite o e-mail em um formato inválido
+  // 3.5 - Caso digite o e-mail em um formato inválido
   emailFormatedNotValidError: {
     text: `{{user}}, esse e-mail não é valido, aperte no botão abaixo para tentar novamente.`,
     buttons: {
