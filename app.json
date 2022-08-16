@@ -10,18 +10,100 @@
   ],
 
   "env": {
-    "DISCORD_CHANNEL_ID": {
-      "value": "999155393907400846"
+    "DISCORD_CHANNEL_ID": { 
+      "value": "Coloque o id do canal do seu servidor"
     },
     "DISCORD_BOT_TOKEN": {
-      "value": "ODYyNzkwNjkxNDAyMDIyOTMy.GlA9LC.guex0Za-Dg944MQDibxS0QcEfNJKjKvJumzaRE"
+      "value": "Coloque seu token do discord bot"
     },
     "DISCORD_BOT_ID": {
-      "value": "862790691402022932"
+      "value": "Coloque o id do seu bot"
+    },
+    "MAKE_WEBHOOK_URL": {
+      "value": "Coloque a url do MAKE WebHook(http://...)"
+    },
+    
+    "BOAS_VINDAS_TEXTO": {
+      "value": "Seja muito bem-vindo(a) à Comunidade de Automação, aperte no botão abaixo para confirmar seu e-mail e liberar seu acesso."
+    },
+    "BOAS_VINDAS_TEXTO_BOTAO": {
+      "value": "LIBERAR MEU ACESSO"
     },
 
-    "MAKE_WEBHOOK_URL": {
-      "value": "https://"
+    "VERIFICACAO_INICIAL_TITULO_POPUP": {
+      "value": "VERIFICAÇÃO"
+    },
+    "VERIFICACAO_INICIAL_TEXTO_POPUP": {
+      "value": "Digite seu e-mail de compra da hotmart 👇"
+    },
+
+    "FORMATO_EMAIL_INVALIDO_TEXTO": {
+      "value": "E-mail não encontrado, tente novamente ou entre em contato com o suporte"
+    },
+    "FORMATO_EMAIL_INVALIDO_TEXTO_BOTAO_TENTE_NOVAMENTE": {
+      "value": "TENTAR NOVAMENTE"
+    },
+    "FORMATO_EMAIL_INVALIDO_TEXTO_BOTAO_FALAR_SUPORTE": {
+      "value": "FALAR COM O SUPORTE"
+    },
+    "FORMATO_EMAIL_INVALIDO_LINK_BOTAO_FALAR_SUPORTE": {
+      "value": "https://api.whatsapp.com/send?phone=+55xxxxxxxx&text=preciso%20de%20ajuda%20com%20o%20Discord!"
+    },
+
+    "EMAIL_NAO_ENCONTRADO_TEXTO": {
+      "value": "e-mail não encontrado, tente novamente ou entre em contato com o suporte"
+    },
+    "EMAIL_NAO_ENCONTRADO_BOTAO_TENTE_NOVAMENTE": {
+      "value": "TENTAR NOVAMENTE"
+    },
+    "EMAIL_NAO_ENCONTRADO_BOTAO_FALAR_SUPORTE": {
+      "value": "FALAR COM O SUPORTE"
+    },
+    "EMAIL_NAO_ENCONTRADO_LINK_BOTAO_FALAR_SUPORTE": {
+      "value": "https://api.whatsapp.com/send?phone=+55xxxxxxxx&text=preciso%20de%20ajuda%20com%20o%20Discord!"
+    },
+
+    "USUARIO_JA_EXISTE_NO_SERVIDOR_TEXTO": {
+      "value": "Já existe uma conta com esse e-mail dentro da comunidade no Discord, aperte no botão abaixo para removê-lo e depois entre novamente através do link de convite."
+    },
+    "USUARIO_JA_EXISTE_NO_SERVIDOR_BOTAO_TEXTO": {
+      "value": "REMOVER ACESSO"
+    },
+
+    "VERIFICACAO_USUARIO_JA_EXISTE_TEXTO": {
+      "value": "VERIFICAÇÃO"
+    },
+    "VERIFICACAO_USUARIO_JA_EXISTE_TEXTO_POPUP": {
+      "value": "Digite o código de transação da Hotmart 👇"
+    },
+
+    "VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_TEXTO": {
+      "value": "código de transação inválido, tente novamente ou entre em contato com o suporte"
+    },
+    "VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_BOTAO_TENTE_NOVAMENTE": {
+      "value": "TENTAR NOVAMENTE"
+    },
+    "VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_BOTAO_FALAR_SUPORTE": {
+      "value": "FALAR COM O SUPORTE"
+    },
+    "VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_LINK_BOTAO_FALAR_SUPORTE": {
+      "value": "https://api.whatsapp.com/send?phone=+55xxxxxxxx&text=preciso%20de%20ajuda%20com%20o%20Discord!"
+    },
+
+    "SAIR_SERVIDOR_VIA_COMANDO_TEXTO": {
+      "value": "Deseja mesmo sair do servidor? Aperte no botão abaixo para sair."
+    },
+    "SAIR_SERVIDOR_VIA_COMANDO_TEXTO_BOTAO": {
+      "value": "SAIR DO SERVIDOR"
+    },
+    "SAIR_SERVIDOR_VIA_COMANDO_TEXTO_PADRAO_ERRO": {
+      "value": "Ocorreu um erro sinistro ao você tentar sair do servidor, entre em contato com o suporte."
+    },
+    "SAIR_SERVIDOR_VIA_COMANDO_BOTAO_FALAR_SUPORTE": {
+      "value": "FALAR COM O SUPORTE"
+    },
+    "SAIR_SERVIDOR_VIA_COMANDO_LINK_BOTAO_FALAR_SUPORTE": {
+      "value": "https://api.whatsapp.com/send?phone=+55xxxxxxxx&text=preciso%20de%20ajuda%20com%20o%20Discord!"
     }
   }
 }
