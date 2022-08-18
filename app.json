@@ -23,86 +23,86 @@
       "value": "Coloque a url do MAKE WebHook(http://...)"
     },
     
-    "BOAS_VINDAS_TEXTO": {
+    "1_1BOAS_VINDAS_TEXTO": {
       "value": "Seja muito bem-vindo(a) à Comunidade de Automação, aperte no botão abaixo para confirmar seu e-mail e liberar seu acesso."
     },
-    "BOAS_VINDAS_TEXTO_BOTAO": {
+    "1_2BOAS_VINDAS_TEXTO_BOTAO": {
       "value": "LIBERAR MEU ACESSO"
     },
 
-    "VERIFICACAO_INICIAL_TITULO_POPUP": {
+    "2_1VERIFICACAO_INICIAL_TITULO_POPUP": {
       "value": "VERIFICAÇÃO"
     },
-    "VERIFICACAO_INICIAL_TEXTO_POPUP": {
+    "2_2VERIFICACAO_INICIAL_TEXTO_POPUP": {
       "value": "Digite seu e-mail de compra da hotmart 👇"
     },
 
-    "FORMATO_EMAIL_INVALIDO_TEXTO": {
+    "3_1FORMATO_EMAIL_INVALIDO_TEXTO": {
       "value": "E-mail não encontrado, tente novamente ou entre em contato com o suporte"
     },
-    "FORMATO_EMAIL_INVALIDO_TEXTO_BOTAO_TENTE_NOVAMENTE": {
+    "3_2FORMATO_EMAIL_INVALIDO_TEXTO_BOTAO_TENTE_NOVAMENTE": {
       "value": "TENTAR NOVAMENTE"
     },
-    "FORMATO_EMAIL_INVALIDO_TEXTO_BOTAO_FALAR_SUPORTE": {
+    "3_3FORMATO_EMAIL_INVALIDO_TEXTO_BOTAO_FALAR_SUPORTE": {
       "value": "FALAR COM O SUPORTE"
     },
-    "FORMATO_EMAIL_INVALIDO_LINK_BOTAO_FALAR_SUPORTE": {
+    "3_4FORMATO_EMAIL_INVALIDO_LINK_BOTAO_FALAR_SUPORTE": {
       "value": "https://api.whatsapp.com/send?phone=+55xxxxxxxx&text=preciso%20de%20ajuda%20com%20o%20Discord!"
     },
 
-    "EMAIL_NAO_ENCONTRADO_TEXTO": {
+    "4_1EMAIL_NAO_ENCONTRADO_TEXTO": {
       "value": "e-mail não encontrado, tente novamente ou entre em contato com o suporte"
     },
-    "EMAIL_NAO_ENCONTRADO_BOTAO_TENTE_NOVAMENTE": {
+    "4_2EMAIL_NAO_ENCONTRADO_BOTAO_TENTE_NOVAMENTE": {
       "value": "TENTAR NOVAMENTE"
     },
-    "EMAIL_NAO_ENCONTRADO_BOTAO_FALAR_SUPORTE": {
+    "4_3EMAIL_NAO_ENCONTRADO_BOTAO_FALAR_SUPORTE": {
       "value": "FALAR COM O SUPORTE"
     },
-    "EMAIL_NAO_ENCONTRADO_LINK_BOTAO_FALAR_SUPORTE": {
+    "4_4EMAIL_NAO_ENCONTRADO_LINK_BOTAO_FALAR_SUPORTE": {
       "value": "https://api.whatsapp.com/send?phone=+55xxxxxxxx&text=preciso%20de%20ajuda%20com%20o%20Discord!"
     },
 
-    "USUARIO_JA_EXISTE_NO_SERVIDOR_TEXTO": {
+    "5_1USUARIO_JA_EXISTE_NO_SERVIDOR_TEXTO": {
       "value": "Já existe uma conta com esse e-mail dentro da comunidade no Discord, aperte no botão abaixo para removê-lo e depois entre novamente através do link de convite."
     },
-    "USUARIO_JA_EXISTE_NO_SERVIDOR_BOTAO_TEXTO": {
+    "5_2USUARIO_JA_EXISTE_NO_SERVIDOR_BOTAO_TEXTO": {
       "value": "REMOVER ACESSO"
     },
 
-    "VERIFICACAO_USUARIO_JA_EXISTE_TEXTO": {
+    "6_1VERIFICACAO_USUARIO_JA_EXISTE_TEXTO": {
       "value": "VERIFICAÇÃO"
     },
-    "VERIFICACAO_USUARIO_JA_EXISTE_TEXTO_POPUP": {
+    "6_2VERIFICACAO_USUARIO_JA_EXISTE_TEXTO_POPUP": {
       "value": "Digite o código de transação da Hotmart 👇"
     },
 
-    "VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_TEXTO": {
+    "7_1VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_TEXTO": {
       "value": "código de transação inválido, tente novamente ou entre em contato com o suporte"
     },
-    "VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_BOTAO_TENTE_NOVAMENTE": {
+    "7_2VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_BOTAO_TENTE_NOVAMENTE": {
       "value": "TENTAR NOVAMENTE"
     },
-    "VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_BOTAO_FALAR_SUPORTE": {
+    "7_3VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_BOTAO_FALAR_SUPORTE": {
       "value": "FALAR COM O SUPORTE"
     },
-    "VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_LINK_BOTAO_FALAR_SUPORTE": {
+    "7_4VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_LINK_BOTAO_FALAR_SUPORTE": {
       "value": "https://api.whatsapp.com/send?phone=+55xxxxxxxx&text=preciso%20de%20ajuda%20com%20o%20Discord!"
     },
 
-    "SAIR_SERVIDOR_VIA_COMANDO_TEXTO": {
+    "8_1SAIR_SERVIDOR_VIA_COMANDO_TEXTO": {
       "value": "Deseja mesmo sair do servidor? Aperte no botão abaixo para sair."
     },
-    "SAIR_SERVIDOR_VIA_COMANDO_TEXTO_BOTAO": {
+    "8_2SAIR_SERVIDOR_VIA_COMANDO_TEXTO_BOTAO": {
       "value": "SAIR DO SERVIDOR"
     },
-    "SAIR_SERVIDOR_VIA_COMANDO_TEXTO_PADRAO_ERRO": {
+    "8_3SAIR_SERVIDOR_VIA_COMANDO_TEXTO_PADRAO_ERRO": {
       "value": "Ocorreu um erro sinistro ao você tentar sair do servidor, entre em contato com o suporte."
     },
-    "SAIR_SERVIDOR_VIA_COMANDO_BOTAO_FALAR_SUPORTE": {
+    "8_4SAIR_SERVIDOR_VIA_COMANDO_BOTAO_FALAR_SUPORTE": {
       "value": "FALAR COM O SUPORTE"
     },
-    "SAIR_SERVIDOR_VIA_COMANDO_LINK_BOTAO_FALAR_SUPORTE": {
+    "8_5SAIR_SERVIDOR_VIA_COMANDO_LINK_BOTAO_FALAR_SUPORTE": {
       "value": "https://api.whatsapp.com/send?phone=+55xxxxxxxx&text=preciso%20de%20ajuda%20com%20o%20Discord!"
     }
   }
