@@ -37,16 +37,26 @@
       "value": "Digite seu e-mail de compra da hotmart 👇"
     },
 
-    "_3_1_FORMATO_EMAIL_INVALIDO_TEXTO": {
+    "_3_1_VERIFICACAO_ACESSO_LIBERADO_TEXTO": {
       "value": "E-mail não encontrado, tente novamente ou entre em contato com o suporte"
     },
-    "_3_2_FORMATO_EMAIL_INVALIDO_TEXTO_BOTAO_TENTE_NOVAMENTE": {
+    "_3_2_VERIFICACAO_ACESSO_LIBERADO_TEXTO_BOTAO_CANAL_BOAS_VINDAS": {
+      "value": "CANAL DE BOAS-VINDAS"
+    },
+    "_3_3_VERIFICACAO_ACESSO_LIBERADO_LINK_BOTAO_CANAL_BOAS_VINDAS": {
+      "value": "https://ptb.discord.com/channels/952631809269727292/952631809269727295"
+    },
+
+    "_3_4_VERIFICACAO_FORMATO_EMAIL_INVALIDO_TEXTO": {
+      "value": "E-mail não encontrado, tente novamente ou entre em contato com o suporte"
+    },
+    "_3_5_VERIFICACAO_FORMATO_EMAIL_INVALIDO_TEXTO_BOTAO_TENTE_NOVAMENTE": {
       "value": "TENTAR NOVAMENTE"
     },
-    "_3_3_FORMATO_EMAIL_INVALIDO_TEXTO_BOTAO_FALAR_SUPORTE": {
+    "_3_6_VERIFICACAO_FORMATO_EMAIL_INVALIDO_TEXTO_BOTAO_FALAR_SUPORTE": {
       "value": "FALAR COM O SUPORTE"
     },
-    "_3_4_FORMATO_EMAIL_INVALIDO_LINK_BOTAO_FALAR_SUPORTE": {
+    "_3_7_VERIFICACAO_FORMATO_EMAIL_INVALIDO_LINK_BOTAO_FALAR_SUPORTE": {
       "value": "https://api.whatsapp.com/send?phone=+55xxxxxxxx&text=preciso%20de%20ajuda%20com%20o%20Discord!"
     },
 
@@ -80,13 +90,10 @@
     "_7_1_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_TEXTO": {
       "value": "código de transação inválido, tente novamente ou entre em contato com o suporte"
     },
-    "_7_2_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_BOTAO_TENTE_NOVAMENTE": {
-      "value": "TENTAR NOVAMENTE"
-    },
-    "_7_3_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_BOTAO_FALAR_SUPORTE": {
+    "_7_2_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_BOTAO_FALAR_SUPORTE": {
       "value": "FALAR COM O SUPORTE"
     },
-    "_7_4_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_LINK_BOTAO_FALAR_SUPORTE": {
+    "_7_3_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_LINK_BOTAO_FALAR_SUPORTE": {
       "value": "https://api.whatsapp.com/send?phone=+55xxxxxxxx&text=preciso%20de%20ajuda%20com%20o%20Discord!"
     },
 
