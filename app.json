@@ -90,13 +90,13 @@
       "value": "https://api.whatsapp.com/send?phone=+55xxxxxxxx&text=preciso%20de%20ajuda%20com%20o%20Discord!"
     },
 
-    "_(8_1SAIR_SERVIDOR_VIA_COMANDO_TEXTO": {
+    "_8_1SAIR_SERVIDOR_VIA_COMANDO_TEXTO": {
       "value": "Deseja mesmo sair do servidor? Aperte no botão abaixo para sair."
     },
     "_8_2SAIR_SERVIDOR_VIA_COMANDO_TEXTO_BOTAO": {
       "value": "SAIR DO SERVIDOR"
     },
-    "_(8_3SAIR_SERVIDOR_VIA_COMANDO_TEXTO_PADRAO_ERRO": {
+    "_8_3SAIR_SERVIDOR_VIA_COMANDO_TEXTO_PADRAO_ERRO": {
       "value": "Ocorreu um erro sinistro ao você tentar sair do servidor, entre em contato com o suporte."
     },
     "_8_4SAIR_SERVIDOR_VIA_COMANDO_BOTAO_FALAR_SUPORTE": {
