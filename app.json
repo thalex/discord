@@ -90,10 +90,13 @@
     "_7_1_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_TEXTO": {
       "value": "código de transação inválido, tente novamente ou entre em contato com o suporte"
     },
-    "_7_2_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_BOTAO_FALAR_SUPORTE": {
+    "_7_2_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_BOTAO_TENTE_NOVAMENTE": {
+      "value": "código de transação inválido, tente novamente ou entre em contato com o suporte"
+    },
+    "_7_3_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_BOTAO_FALAR_SUPORTE": {
       "value": "FALAR COM O SUPORTE"
     },
-    "_7_3_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_LINK_BOTAO_FALAR_SUPORTE": {
+    "_7_4_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_LINK_BOTAO_FALAR_SUPORTE": {
       "value": "https://api.whatsapp.com/send?phone=+55xxxxxxxx&text=preciso%20de%20ajuda%20com%20o%20Discord!"
     },
 
