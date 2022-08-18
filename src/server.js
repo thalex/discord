@@ -350,7 +350,7 @@ client.on('messageCreate', async (message) => {
   const channelId = message.channel.id;
 
   if(message.content === '/load-verify-email-button') {
-    loadVerifyEmailButton(null, channelId);
+    await loadVerifyEmailButton(null, channelId);
 
     if(message.deletable) {
       message.delete();
