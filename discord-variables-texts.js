@@ -93,6 +93,7 @@ const discordTexts = {
         link: process.env._3_3_VERIFICACAO_ACESSO_LIBERADO_LINK_BOTAO_CANAL_BOAS_VINDAS || 'https://ptb.discord.com/channels/952631809269727292/952631809269727295'
       }
     },
+    
     success: {
       text: process.env._3_1_VERIFICACAO_ACESSO_LIBERADO_TEXTO || "{{user}}, acesso liberado! Aperte no botão abaixo para ir pro canal de boas-vindas.",
     },
@@ -122,6 +123,16 @@ const discordTexts = {
  
     // 7.1 - Número de transação da hotmart inválido..
     notFoundStatus: {
+      text: process.env._7_1_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_TEXTO || "{{user}}, provavelmente ocorreu um erro no resultado do make webhook. Entre em contato com o suporte.",
+      buttons: {
+        talkToSuport: {
+          label: process.env._7_2_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_BOTAO_FALAR_SUPORTE || "FALAR COM O SUPORTE",
+          link: process.env._7_3_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_LINK_BOTAO_FALAR_SUPORTE || "https://api.whatsapp.com/send?phone=+12793001001&text=preciso%20de%20ajuda%20com%20o%20Discord!"
+        }
+      },
+    },
+
+    transactionCodeInvalid: {
       text: process.env._7_1_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_TEXTO || "{{user}}, código de transação inválido, tente novamente ou entre em contato com o suporte.",
       buttons: {
         talkToSuport: {
@@ -132,9 +143,21 @@ const discordTexts = {
     }
   },
 
+  discord: {
+    notFoundStatus: {
+      text: process.env._9_1_DISCORD_ERROR || "{{user}}, provavelmente ocorreu um erro no discord.",
+      buttons: {
+        talkToSuport: {
+          label: process.env._9_2_DISCORD_ERROR || "FALAR COM O SUPORTE",
+          link: process.env._9_3_DISCORD_ERROR || "https://api.whatsapp.com/send?phone=+12793001001&text=preciso%20de%20ajuda%20com%20o%20Discord!"
+        }
+      },
+    },
+  },
+
   // Variaveis 3 - parte 2;
   emailFormatedNotValidError: {
-    text: process.env._3_4_VERIFICACAO_FORMATO_EMAIL_INVALIDO_TEXTO || `{{user}}, esse e-mail não é valido, aperte no botão abaixo para tentar novamente.`,
+    text: `{{user}}, esse e-mail não é valido, aperte no botão abaixo para tentar novamente.`,
     buttons: {
       verifyEmailAgain: {
         label: process.env._3_5_VERIFICACAO_FORMATO_EMAIL_INVALIDO_TEXTO_BOTAO_TENTE_NOVAMENTE || "TENTAR NOVAMENTE"
