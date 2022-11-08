@@ -1,14 +1,17 @@
 require("dotenv").config();
 const { default: axios } = require('axios');
 
+const wait = require('node:timers/promises').setTimeout;
+
+
 const {
   discordTexts, replaceToMemberUserTag
 } = require('../discord-variables-texts');
 
-const { 
-  ButtonBuilder, 
-  ActionRowBuilder, 
-  ModalBuilder, 
+const {
+  ButtonBuilder,
+  ActionRowBuilder,
+  ModalBuilder,
   TextInputBuilder,
   Client,
   GatewayIntentBits,
@@ -17,8 +20,8 @@ const {
 
 const client = new Client({
   intents: [
-    GatewayIntentBits.Guilds, 
-    GatewayIntentBits.GuildMessages, 
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.MessageContent,
   ]
@@ -45,9 +48,9 @@ async function loadVerifyEmailButton(member, channelIdParam) {
         .setStyle(3),
     );
 
-  await channel.send({ 
+  await channel.send({
     content: member ? replaceToMemberUserTag(discordTexts.channel.welcome.text, member) : discordTexts.channel.welcome.text,
-    components: [openModalBuilderBtn] 
+    components: [openModalBuilderBtn]
   });
 }
 
@@ -63,7 +66,7 @@ async function handleButtonInteraction(interaction) {
 
   const emailInput = new TextInputBuilder()
     .setCustomId('emailInput')
-    .setLabel(emailInputLabel) 
+    .setLabel(emailInputLabel)
     .setStyle(1)
     .setMaxLength(100);
 
@@ -81,7 +84,7 @@ async function verifyIfEmailIsValid(interaction) {
 
   const member = interaction.member.user;
 
-  if(!emailRegex.test(userEmail)) {
+  if (!emailRegex.test(userEmail)) {
     const supportBtnMessage = new ButtonBuilder()
       .setLabel(replaceToMemberUserTag(discordTexts.emailFormatedNotValidError.buttons.talkToSuport.label, member))
       .setStyle(5)
@@ -96,10 +99,10 @@ async function verifyIfEmailIsValid(interaction) {
         supportBtnMessage
       );
 
-    await interaction.reply({ 
-      content: replaceToMemberUserTag(discordTexts.emailFormatedNotValidError.text, member), 
+    await interaction.reply({
+      content: replaceToMemberUserTag(discordTexts.emailFormatedNotValidError.text, member),
       ephemeral: true,
-      components: [buttons] 
+      components: [buttons]
     });
 
     return false;
@@ -108,7 +111,7 @@ async function verifyIfEmailIsValid(interaction) {
   return userEmail;
 }
 
-async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) {
+async function sendToValidateEmailFromMakeWebhook({ data, interaction, command }) {
   const member = interaction.member.user;
 
   const supportBtnMessage = new ButtonBuilder()
@@ -118,6 +121,11 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
 
   const rowMessage = new ActionRowBuilder().addComponents(supportBtnMessage);
 
+  interaction.reply({
+    content: `${member}, aguarde... Estamos finalizando o processo...`,
+    ephemeral: true
+  });
+
   try {
     const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, {
       ...data,
@@ -125,27 +133,29 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
     });
 
     const result = webhookResponse.data;
-  
-    if(result.status) {
+
+    if (result.status) {
       const status = result.status.toLowerCase();
-  
-      if(status === 'success') {
+
+      if (status === 'success') {
         const goToOtherChannel = new ActionRowBuilder()
           .addComponents(
             new ButtonBuilder()
-            .setLabel(replaceToMemberUserTag(discordTexts.webHook.redirectAfterSuccess.button.label, member))
-            .setStyle(5)
-            .setURL(replaceToMemberUserTag(discordTexts.webHook.redirectAfterSuccess.button.link, member))
+              .setLabel(replaceToMemberUserTag(discordTexts.webHook.redirectAfterSuccess.button.label, member))
+              .setStyle(5)
+              .setURL(replaceToMemberUserTag(discordTexts.webHook.redirectAfterSuccess.button.link, member))
           );
 
-        await interaction.reply({ 
+        await wait(2500)
+        await interaction.editReply({
           content: replaceToMemberUserTag(discordTexts.webHook.success.text, member),
           ephemeral: true,
           components: [goToOtherChannel]
         });
+        console.log(`TEXTO - SUCCESS: ${discordTexts.webHook.success.text}`)
       }
-  
-      if(status === 'id-exist') {
+
+      if (status === 'id-exist') {
         const confirmDiscordServerExit = new ActionRowBuilder()
           .addComponents(
             new ButtonBuilder()
@@ -154,14 +164,17 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
               .setStyle(4),
           );
 
-        await interaction.reply({ 
+        await wait(2500)
+        await interaction.editReply({
           content: replaceToMemberUserTag(discordTexts.webHook.emailExist.text, member),
           ephemeral: true,
           components: [confirmDiscordServerExit]
         });
+        console.log(`TEXTO - IDEXIST: ${discordTexts.webHook.emailExist.text}`)
+
       }
-    
-      if(status === 'error') {
+
+      if (status === 'error') {
         const buttons = new ActionRowBuilder()
           .addComponents(
             new ButtonBuilder()
@@ -170,32 +183,34 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
               .setStyle(1),
             supportBtnMessage
           );
-  
-        await interaction.reply({ 
+
+        await wait(2500)
+        await interaction.deferReply({
           content: replaceToMemberUserTag(discordTexts.webHook.error.text, member),
           ephemeral: true,
           components: [buttons],
         });
+        console.log(`TEXTO - ERROS: ${discordTexts.webHook.error.text}`)
       }
-      return null;
     }
-    
-    await interaction.reply({ 
-      content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus.text, member),
-      ephemeral: true,
-      components: [rowMessage]
-    });
-    
-    return null;
+    return;
   } catch (error) {
-    await interaction.reply({ 
+
+    console.log('Error Catch')
+
+    console.log(error)
+
+    await wait(2500)
+
+    await interaction.editReply({
       content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus.text, member),
       ephemeral: true,
       components: [rowMessage]
     });
+    console.log(`TEXTO - ERROS [CATCH]: ${discordTexts.webHook.notFoundStatus.text}`)
   }
 
-  return null;
+  return;
 }
 
 async function verifyLeaveInput(interaction) {
@@ -203,8 +218,8 @@ async function verifyLeaveInput(interaction) {
 
   const member = interaction.member.user;
 
-  if(!leaveValue) {
-    await interaction.reply({ 
+  if (!leaveValue) {
+    await interaction.reply({
       content: replaceToMemberUserTag(discordTexts.server.leave.notFoundValue.text, member),
       ephemeral: true,
     });
@@ -217,7 +232,7 @@ async function verifyLeaveInput(interaction) {
 
 async function openLeaveModalBuilder(interaction) {
   const member = interaction.member.user;
-  
+
   const leaveModalBuilderInputLabel = replaceToMemberUserTag(discordTexts.server.leave.modal.leaveInputLabel, member);
   const modalTitle = replaceToMemberUserTag(discordTexts.server.leave.modal.title, member);
 
@@ -227,7 +242,7 @@ async function openLeaveModalBuilder(interaction) {
 
   const leaveInput = new TextInputBuilder()
     .setCustomId('leaveInput')
-    .setLabel(leaveModalBuilderInputLabel) 
+    .setLabel(leaveModalBuilderInputLabel)
     .setStyle(1)
     .setMaxLength(100);
 
@@ -238,7 +253,7 @@ async function openLeaveModalBuilder(interaction) {
   return interaction.showModal(modal);
 }
 
-async function discordServerLeaveMakeWebhook({data, interaction, command}) {
+async function discordServerLeaveMakeWebhook({ data, interaction, command }) {
   const member = interaction.member.user;
 
   const rowMessage = new ActionRowBuilder()
@@ -248,7 +263,7 @@ async function discordServerLeaveMakeWebhook({data, interaction, command}) {
         .setCustomId('confirmDiscordServerExit')
         .setLabel(
           replaceToMemberUserTag(
-            discordTexts.server.leave.notFoundStatus.buttons.verifyEmailAgain.label, 
+            discordTexts.server.leave.notFoundStatus.buttons.verifyEmailAgain.label,
             member
           )
         ),
@@ -256,71 +271,71 @@ async function discordServerLeaveMakeWebhook({data, interaction, command}) {
         .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.label, member))
         .setStyle(5)
         .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member)),
-  );
+    );
 
   try {
     const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, {
       ...data,
       command,
     });
-    
+
     const result = webhookResponse.data;
 
-    if(result.status) {
+    if (result.status) {
       const status = result.status.toLowerCase();
 
-      if(status === 'success') {
-        await interaction.reply({ 
+      if (status === 'success') {
+        await interaction.reply({
           content: replaceToMemberUserTag(discordTexts.server.leave.webhook.success.text, member),
           ephemeral: true,
         });
       }
 
-      if(status === 'error') {
+      if (status === 'error') {
         const rowMessage = new ActionRowBuilder()
           .addComponents(
             new ButtonBuilder()
               .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.label, member))
               .setStyle(5)
               .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member)),
-        );
-        
-        await interaction.reply({ 
+          );
+
+        await interaction.reply({
           content: replaceToMemberUserTag(discordTexts.server.leave.webhook.error.text, member),
           ephemeral: true,
           components: [rowMessage]
         });
       }
 
-      if(status === 'leave-transaction-error') {  
+      if (status === 'leave-transaction-error') {
         const rowMessage = new ActionRowBuilder()
           .addComponents(
             new ButtonBuilder()
               .setCustomId('confirmDiscordServerExit')
               .setLabel(
                 replaceToMemberUserTag(
-                  discordTexts.server.leave.webhook.transactionError.buttons.verifyEmailAgain.label, 
+                  discordTexts.server.leave.webhook.transactionError.buttons.verifyEmailAgain.label,
                   member
-                  )
                 )
+              )
               .setStyle(1),
             new ButtonBuilder()
               .setLabel(
                 replaceToMemberUserTag(
-                  discordTexts.server.leave.webhook.transactionError.buttons.verifyEmailAgain.label, 
+                  discordTexts.server.leave.webhook.transactionError.buttons.verifyEmailAgain.label,
                   member
                 )
               )
               .setStyle(5)
               .setURL(replaceToMemberUserTag(
                 replaceToMemberUserTag(
-                  discordTexts.server.leave.webhook.transactionError.buttons.talkToSuport.label, 
+                  discordTexts.server.leave.webhook.transactionError.buttons.talkToSuport.label,
                   member
                 )
               )),
-        );
+          );
 
-        await interaction.reply({ 
+        await interaction.reply({
           content: replaceToMemberUserTag(discordTexts.server.leave.webhook.transactionError.text, member),
           ephemeral: true,
           components: [rowMessage]
@@ -332,36 +347,36 @@ async function discordServerLeaveMakeWebhook({data, interaction, command}) {
       };
     }
 
-    await interaction.reply({ 
+    await interaction.reply({
       content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus.text, member),
       ephemeral: true,
       components: [rowMessage]
     });
   } catch (error) {
-    await interaction.reply({ 
+    await interaction.reply({
       content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus.text, member),
       ephemeral: true,
       components: [rowMessage]
     });
   }
-  
+
   return null;
 }
 
 client.on('messageCreate', async (message) => {
   const channelId = message.channel.id;
 
-  if(message.content === '/load-verify-email-button') {
+  if (message.content === '/load-verify-email-button') {
     await loadVerifyEmailButton(null, channelId);
 
-    if(message.deletable) {
+    if (message.deletable) {
       message.delete();
     }
   }
 });
 
 client.on('interactionCreate', async (interaction) => {
-  if(!interaction) {
+  if (!interaction) {
     return null;
   }
 
@@ -370,7 +385,7 @@ client.on('interactionCreate', async (interaction) => {
   let discriminator = '';
   let tag = '';
 
-  if(member) {
+  if (member) {
     username = member.user.username;
     discriminator = member.user.discriminator;
     tag = `${username}#${discriminator}`;
@@ -379,11 +394,11 @@ client.on('interactionCreate', async (interaction) => {
   if (interaction.customId === 'openModalBuilderBtn') {
     return handleButtonInteraction(interaction);
   };
-  
-  if(interaction.type === InteractionType.ModalSubmit && interaction.customId === 'validateEmailId') {
+
+  if (interaction.type === InteractionType.ModalSubmit && interaction.customId === 'validateEmailId') {
     const emailInformed = await verifyIfEmailIsValid(interaction);
 
-    if(emailInformed) {
+    if (emailInformed) {
       await sendToValidateEmailFromMakeWebhook({
         data: {
           email: emailInformed,
@@ -405,16 +420,16 @@ client.on('interactionCreate', async (interaction) => {
     return null;
   }
 
-  if(interaction.isButton() && interaction.customId === 'confirmDiscordServerExit') {
+  if (interaction.isButton() && interaction.customId === 'confirmDiscordServerExit') {
     await openLeaveModalBuilder(interaction)
 
     return null;
   }
 
-  if(interaction.type === InteractionType.ModalSubmit && interaction.customId === 'leaveModalBuilderId') {
+  if (interaction.type === InteractionType.ModalSubmit && interaction.customId === 'leaveModalBuilderId') {
     const leaveValue = await verifyLeaveInput(interaction);
 
-    if(leaveValue) {
+    if (leaveValue) {
       await discordServerLeaveMakeWebhook({
         data: {
           email: null,
@@ -436,7 +451,7 @@ client.on('interactionCreate', async (interaction) => {
     return null;
   }
 
-  if(interaction.isButton() && interaction.customId === 'serverExitBtn') {
+  if (interaction.isButton() && interaction.customId === 'serverExitBtn') {
     await discordServerLeaveMakeWebhook({
       data: {
         email: null,
@@ -458,15 +473,15 @@ client.on('interactionCreate', async (interaction) => {
   }
 
   // commands
-  if(interaction.type === InteractionType.ApplicationCommand) {
-    if(interaction.commandName === discordTexts.server.commands.sair.commandName) {
+  if (interaction.type === InteractionType.ApplicationCommand) {
+    if (interaction.commandName === discordTexts.server.commands.sair.commandName) {
       const serverExit = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
-          .setCustomId('serverExitBtn')
-          .setLabel(replaceToMemberUserTag(discordTexts.server.leave.button.label, member))
-          .setStyle(4),
-      );
+        .addComponents(
+          new ButtonBuilder()
+            .setCustomId('serverExitBtn')
+            .setLabel(replaceToMemberUserTag(discordTexts.server.leave.button.label, member))
+            .setStyle(4),
+        );
 
       await interaction.reply({
         content: replaceToMemberUserTag(discordTexts.server.leave.text, member),

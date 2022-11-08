@@ -11,20 +11,20 @@
 
   "env": {
     "DISCORD_CHANNEL_ID": { 
-      "value": "Coloque o id do canal do seu servidor"
+      "value": "1035917941440528515"
     },
     "DISCORD_BOT_TOKEN": {
-      "value": "Coloque seu token do discord bot"
+      "value": "MTAzODQzNDU2MzE3MDUxNzA3Mw.GHLsNp.o0nMbpMKyATbBH-UGAaSzFMASdClSMAGV6tJUc"
     },
     "DISCORD_BOT_ID": {
-      "value": "Coloque o id do seu bot"
+      "value": "1038434563170517073"
     },
     "MAKE_WEBHOOK_URL": {
-      "value": "Coloque a url do MAKE WebHook(http://...)"
+      "value": "https://hook.us1.make.com/rjr6pe33j9jcrve3uuq9jrrvgmv63w42"
     },
     
     "_1_1_BOAS_VINDAS_TEXTO": {
-      "value": "Seja muito bem-vindo(a) à Comunidade de Automação, aperte no botão abaixo para confirmar seu e-mail e liberar seu acesso."
+      "value": "Seja muito bem-vindo(a), aperte no botão abaixo para confirmar seu e-mail e liberar seu acesso."
     },
     "_1_2_BOAS_VINDAS_TEXTO_BOTAO": {
       "value": "LIBERAR MEU ACESSO"
