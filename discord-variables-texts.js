@@ -123,11 +123,11 @@ const discordTexts = {
  
     // 7.1 - Número de transação da hotmart inválido..
     notFoundStatus: {
-      text: process.env._7_1_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_TEXTO || "{{user}}, provavelmente ocorreu um erro no resultado do make webhook. Entre em contato com o suporte.",
+      text: process.env._9_1_VERIFICACAO_MAKE_NOT_FOUND_TEXTO || "{{user}}, provavelmente ocorreu um erro no resultado do make webhook. Entre em contato com o suporte.",
       buttons: {
         talkToSuport: {
-          label: process.env._7_2_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_BOTAO_FALAR_SUPORTE || "FALAR COM O SUPORTE",
-          link: process.env._7_3_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_LINK_BOTAO_FALAR_SUPORTE || "https://api.whatsapp.com/send?phone=+12793001001&text=preciso%20de%20ajuda%20com%20o%20Discord!"
+          label: process.env._9_2_VERIFICACAO_MAKE_NOT_FOUND_BOTAO_FALAR_SUPORTE || "FALAR COM O SUPORTE",
+          link: process.env._9_3_VERIFICACAO_MAKE_NOT_FOUND_LINK_BOTAO_FALAR_SUPORTE || "https://api.whatsapp.com/send?phone=+12793001001&text=preciso%20de%20ajuda%20com%20o%20Discord!"
         }
       },
     },
