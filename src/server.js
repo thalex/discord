@@ -41,37 +41,44 @@ async function loadVerifyEmailButton(member, channelIdParam) {
     .addComponents(
       new ButtonBuilder()
         .setCustomId('openModalBuilderBtn')
-        .setLabel(replaceToMemberUserTag(discordTexts.channel.verifyEmailButton.label))
+        .setLabel(discordTexts.channel.verifyEmailButton.label)
         .setStyle(3),
     );
 
   await channel.send({ 
-    content: member ? replaceToMemberUserTag(discordTexts.channel.welcome.text, member) : discordTexts.channel.welcome.text,
+    content: discordTexts.channel.welcome.text,
     components: [openModalBuilderBtn] 
   });
 }
 
 async function handleButtonInteraction(interaction) {
-  const user = interaction.member.user;
+  try {
+    const user = interaction.member.user;
 
-  const emailInputLabel = replaceToMemberUserTag(discordTexts.channel.modal.emailInputLabel, user);
-  const modalTitle = replaceToMemberUserTag(discordTexts.channel.modal.title, user);
+    const emailInputLabel = replaceToMemberUserTag(discordTexts.channel.modal.emailInputLabel, user);
+    const modalTitle = replaceToMemberUserTag(discordTexts.channel.modal.title, user);
 
-  const modal = new ModalBuilder()
-    .setCustomId('validateEmailId')
-    .setTitle(modalTitle);
+    const modal = new ModalBuilder()
+      .setCustomId('validateEmailId')
+      .setTitle(modalTitle);
 
-  const emailInput = new TextInputBuilder()
-    .setCustomId('emailInput')
-    .setLabel(emailInputLabel) 
-    .setStyle(1)
-    .setMaxLength(100);
+    const emailInput = new TextInputBuilder()
+      .setCustomId('emailInput')
+      .setLabel(emailInputLabel) 
+      .setStyle(1)
+      .setMaxLength(100);
 
-  const emailActionRow = new ActionRowBuilder().addComponents(emailInput);
+    const emailActionRow = new ActionRowBuilder().addComponents(emailInput);
 
-  modal.addComponents(emailActionRow);
+    modal.addComponents(emailActionRow);
 
-  await interaction.showModal(modal);
+    await interaction.showModal(modal);
+  } catch (error) {
+    await interaction.reply({ 
+      content: replaceToMemberUserTag(discordTexts.discord.notFoundStatus.text, member), 
+      ephemeral: true,
+    });
+  }
 }
 
 async function verifyIfEmailIsValid(interaction) {
@@ -118,84 +125,75 @@ async function sendToValidateEmailFromMakeWebhook({data, interaction, command}) 
 
   const rowMessage = new ActionRowBuilder().addComponents(supportBtnMessage);
 
-  try {
-    const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, {
-      ...data,
-      command,
-    });
+  const webhookResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, {
+    ...data,
+    command,
+  });
 
-    const result = webhookResponse.data;
-  
-    if(result.status) {
-      const status = result.status.toLowerCase();
-  
-      if(status === 'success') {
-        const goToOtherChannel = new ActionRowBuilder()
-          .addComponents(
-            new ButtonBuilder()
-            .setLabel(replaceToMemberUserTag(discordTexts.webHook.redirectAfterSuccess.button.label, member))
-            .setStyle(5)
-            .setURL(replaceToMemberUserTag(discordTexts.webHook.redirectAfterSuccess.button.link, member))
-          );
+  const result = webhookResponse.data;
 
-        await interaction.reply({ 
-          content: replaceToMemberUserTag(discordTexts.webHook.success.text, member),
-          ephemeral: true,
-          components: [goToOtherChannel]
-        });
-      }
-  
-      if(status === 'id-exist') {
-        const confirmDiscordServerExit = new ActionRowBuilder()
-          .addComponents(
-            new ButtonBuilder()
-              .setCustomId('confirmDiscordServerExit')
-              .setLabel(replaceToMemberUserTag(discordTexts.webHook.emailExist.button.label))
-              .setStyle(4),
-          );
+  if(result.status) {
+    const status = result.status.toLowerCase();
 
-        await interaction.reply({ 
-          content: replaceToMemberUserTag(discordTexts.webHook.emailExist.text, member),
-          ephemeral: true,
-          components: [confirmDiscordServerExit]
-        });
-      }
-    
-      if(status === 'error') {
-        const buttons = new ActionRowBuilder()
-          .addComponents(
-            new ButtonBuilder()
-              .setCustomId('openModalBuilderBtn')
-              .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.verifyEmailAgain.label, member))
-              .setStyle(1),
-            supportBtnMessage
-          );
+    if(status === 'success') {
+      const goToOtherChannel = new ActionRowBuilder()
+        .addComponents(
+          new ButtonBuilder()
+          .setLabel(replaceToMemberUserTag(discordTexts.webHook.redirectAfterSuccess.button.label, member))
+          .setStyle(5)
+          .setURL(replaceToMemberUserTag(discordTexts.webHook.redirectAfterSuccess.button.link, member))
+        );
+
+      await interaction.reply({ 
+        content: replaceToMemberUserTag(discordTexts.webHook.success.text, member),
+        ephemeral: true,
+        components: [goToOtherChannel]
+      });
+    }
+
+    if(status === 'id-exist') {
+      const confirmDiscordServerExit = new ActionRowBuilder()
+        .addComponents(
+          new ButtonBuilder()
+            .setCustomId('confirmDiscordServerExit')
+            .setLabel(replaceToMemberUserTag(discordTexts.webHook.emailExist.button.label))
+            .setStyle(4),
+        );
+
+      await interaction.reply({ 
+        content: replaceToMemberUserTag(discordTexts.webHook.emailExist.text, member),
+        ephemeral: true,
+        components: [confirmDiscordServerExit]
+      });
+    }
   
-        await interaction.reply({ 
-          content: replaceToMemberUserTag(discordTexts.webHook.error.text, member),
-          ephemeral: true,
-          components: [buttons],
-        });
-      }
-      return null;
+    if(status === 'error') {
+      const buttons = new ActionRowBuilder()
+        .addComponents(
+          new ButtonBuilder()
+            .setCustomId('openModalBuilderBtn')
+            .setLabel(replaceToMemberUserTag(discordTexts.webHook.error.buttons.verifyEmailAgain.label, member))
+            .setStyle(1),
+          supportBtnMessage
+        );
+
+      await interaction.reply({ 
+        content: replaceToMemberUserTag(discordTexts.webHook.error.text, member),
+        ephemeral: true,
+        components: [buttons],
+      });
     }
     
-    await interaction.reply({ 
-      content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus.text, member),
-      ephemeral: true,
-      components: [rowMessage]
-    });
-    
-    return null;
-  } catch (error) {
-    await interaction.reply({ 
-      content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus.text, member),
-      ephemeral: true,
-      components: [rowMessage]
-    });
+    return;
   }
 
-  return null;
+  await interaction.reply({ 
+    content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus.text, member),
+    ephemeral: true,
+    components: [rowMessage]
+  });
+  
+  return;
 }
 
 async function verifyLeaveInput(interaction) {
