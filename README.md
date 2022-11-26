@@ -14,15 +14,6 @@
 
 ___
 
-## Deploy na heroku
-##### Ao clicar no botão para deploy na heroku, você será direcionado para o painel da Heroku aonde poderá dar continuidade no deploy do app em sua conta.
-
-<!-- #### Segue a documentação para te auxiliar em todo este processo
-[![](https://img.shields.io/badge/-Documentação-5276f2)](#docs-to-deploy) -->
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/thalex/discord)
-
-___
 
 ## Deploy na railway
 ##### Ao clicar no botão para deploy na railway, você será direcionado para o painel da Heroku aonde poderá dar continuidade no deploy do app em sua conta.
