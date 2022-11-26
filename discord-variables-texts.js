@@ -63,6 +63,9 @@ const discordTexts = {
       sair: {
         commandName: 'sair',
         description: 'Ao executar este comando, você será removido do servidor.'
+      },
+      panel: {
+        commandName: process.env.DISCORD_PANEL_INITIAL_CMD || '/painel'
       }
     },
   },

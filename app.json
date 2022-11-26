@@ -10,17 +10,20 @@
   ],
 
   "env": {
-    "DISCORD_CHANNEL_ID": { 
+    "DISCORD_CHANNEL_ACCESS_ID": { 
       "value": "1035917941440528515"
     },
     "DISCORD_BOT_TOKEN": {
       "value": "MTAzODQzNDU2MzE3MDUxNzA3Mw.GHLsNp.o0nMbpMKyATbBH-UGAaSzFMASdClSMAGV6tJUc"
     },
-    "DISCORD_BOT_ID": {
+    "DISCORD_BOT_CLIENT_ID": {
       "value": "1038434563170517073"
     },
     "MAKE_WEBHOOK_URL": {
       "value": "https://hook.us1.make.com/rjr6pe33j9jcrve3uuq9jrrvgmv63w42"
+    },
+    "DISCORD_PANEL_INITIAL_CMD": {
+      "value": "painel"
     },
     
     "_1_1_BOAS_VINDAS_TEXTO": {

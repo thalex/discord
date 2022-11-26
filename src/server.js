@@ -35,7 +35,7 @@ const client = new Client({
   Link = 5
 */
 
-const channelId = process.env.DISCORD_CHANNEL_ID;
+const channelId = process.env.DISCORD_CHANNEL_ACCESS_ID;
 
 async function loadVerifyEmailButton(member, channelIdParam) {
   const channel = client.channels.cache.get(channelIdParam || channelId);
@@ -371,7 +371,7 @@ async function discordServerLeaveMakeWebhook({ data, interaction, command }) {
 client.on('messageCreate', async (message) => {
   const channelId = message.channel.id;
 
-  if (message.content === '/load-verify-email-button') {
+  if (message.content === discordTexts.server.commands.panel.commandName) {
     await loadVerifyEmailButton(null, channelId);
 
     if (message.deletable) {

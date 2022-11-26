@@ -11,7 +11,7 @@ const rest = new REST({
 (async () => { 
   await rest.put(
     Routes.applicationCommands(
-      process.env.DISCORD_BOT_ID
+      process.env.DISCORD_BOT_CLIENT_ID
     ),
     { 
       body: [
