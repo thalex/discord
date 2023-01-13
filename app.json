@@ -11,16 +11,16 @@
 
   "env": {
     "DISCORD_CHANNEL_ACCESS_ID": { 
-      "value": "1035917941440528515"
+      "value": "XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
     },
     "DISCORD_BOT_TOKEN": {
-      "value": "MTAzODQzNDU2MzE3MDUxNzA3Mw.GHLsNp.o0nMbpMKyATbBH-UGAaSzFMASdClSMAGV6tJUc"
+      "value": "XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
     },
     "DISCORD_BOT_CLIENT_ID": {
-      "value": "1038434563170517073"
+      "value": "XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
     },
     "MAKE_WEBHOOK_URL": {
-      "value": "https://hook.us1.make.com/rjr6pe33j9jcrve3uuq9jrrvgmv63w42"
+      "value": "XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
     },
     "DISCORD_PANEL_INITIAL_CMD": {
       "value": "painel"
@@ -37,7 +37,7 @@
       "value": "VERIFICAÇÃO"
     },
     "_2_2_VERIFICACAO_INICIAL_TEXTO_POPUP": {
-      "value": "Digite seu e-mail de compra da hotmart 👇"
+      "value": "Digite seu e-mail de compra da Hotmart 👇"
     },
 
     "_3_1_VERIFICACAO_ACESSO_LIBERADO_TEXTO": {
@@ -47,7 +47,7 @@
       "value": "CANAL DE BOAS-VINDAS"
     },
     "_3_3_VERIFICACAO_ACESSO_LIBERADO_LINK_BOTAO_CANAL_BOAS_VINDAS": {
-      "value": "https://ptb.discord.com/channels/952631809269727292/952631809269727295"
+      "value": "https://ptb.discord.com/channels/XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
     },
 
     "_3_4_VERIFICACAO_FORMATO_EMAIL_INVALIDO_TEXTO": {
@@ -64,7 +64,7 @@
     },
 
     "_4_1_EMAIL_NAO_ENCONTRADO_TEXTO": {
-      "value": "e-mail não encontrado, tente novamente ou entre em contato com o suporte"
+      "value": "E-mail não encontrado, tente novamente ou entre em contato com o suporte"
     },
     "_4_2_EMAIL_NAO_ENCONTRADO_BOTAO_TENTE_NOVAMENTE": {
       "value": "TENTAR NOVAMENTE"
@@ -91,10 +91,10 @@
     },
 
     "_7_1_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_TEXTO": {
-      "value": "código de transação inválido, tente novamente ou entre em contato com o suporte"
+      "value": "Código de transação inválido, tente novamente ou entre em contato com o suporte"
     },
     "_7_2_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_BOTAO_TENTE_NOVAMENTE": {
-      "value": "código de transação inválido, tente novamente ou entre em contato com o suporte"
+      "value": "Código de transação inválido, tente novamente ou entre em contato com o suporte"
     },
     "_7_3_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_BOTAO_FALAR_SUPORTE": {
       "value": "FALAR COM O SUPORTE"
@@ -110,7 +110,7 @@
       "value": "SAIR DO SERVIDOR"
     },
     "_8_3_SAIR_SERVIDOR_VIA_COMANDO_TEXTO_PADRAO_ERRO": {
-      "value": "Ocorreu um erro sinistro ao você tentar sair do servidor, entre em contato com o suporte."
+      "value": "Ocorreu um erro terrível ao você tentar sair do servidor, entre em contato com o suporte."
     },
     "_8_4_SAIR_SERVIDOR_VIA_COMANDO_BOTAO_FALAR_SUPORTE": {
       "value": "FALAR COM O SUPORTE"
