@@ -2,7 +2,6 @@ require("dotenv").config();
 
 const { REST } = require('@discordjs/rest')
 const { Routes } = require('discord-api-types/v9');
-const { discordTexts } = require('../../discord-variables-texts');
 
 const rest = new REST({ 
   version: '9',
@@ -14,12 +13,7 @@ const rest = new REST({
       process.env.DISCORD_BOT_CLIENT_ID
     ),
     { 
-      body: [
-        {
-          name: discordTexts.server.commands.sair.commandName,
-          description: discordTexts.server.commands.sair.description,
-        }
-      ] 
+      body: [] 
     },
   )
 })();
