@@ -300,7 +300,7 @@ async function discordServerLeaveMakeWebhook({ data, interaction, command }) {
               .setURL(replaceToMemberUserTag(discordTexts.webHook.error.buttons.talkToSuport.link, member)),
           );
 
-          await interaction.deferReply({
+          await interaction.editReply({
           content: replaceToMemberUserTag(discordTexts.server.leave.webhook.error.text, member),
           ephemeral: true,
           components: [rowMessage]
