@@ -25,7 +25,7 @@ const discordTexts = {
           },
         },
         success: {
-          text: '{{user}}, você será removido do servidor em instantes.'
+          text: '{{user}}, você foi removido da base de dados.'
         },
         transactionError: {
           text: process.env._7_1_VERIFICACAO_CODIGO_TRANSACAO_INVALIDO_TEXTO || '{{user}}, id do hotmart incorreto',
