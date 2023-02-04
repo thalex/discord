@@ -279,7 +279,6 @@ async function discordServerLeaveMakeWebhook({ data, interaction, command }) {
     });
 
     const result = webhookResponse.data;
-    console.log(result);
 
     if (result.status) {
       const status = result.status.toLowerCase();
@@ -340,8 +339,6 @@ async function discordServerLeaveMakeWebhook({ data, interaction, command }) {
     }
   } catch (error) {
     await wait(2500);
-
-    console.log(error);
 
     await interaction.editReply({
       content: replaceToMemberUserTag(discordTexts.webHook.notFoundStatus.text, member),
