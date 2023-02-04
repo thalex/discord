@@ -78,7 +78,7 @@ async function handleButtonInteraction(interaction) {
     await interaction.showModal(modal);
   } catch (error) {
     await interaction.reply({ 
-      content: replaceToMemberUserTag(discordTexts.discord.notFoundStatus.text, member), 
+      content: replaceToMemberUserTag(discordTexts.discord.notFoundStatus.text), 
       ephemeral: true,
     });
   }
@@ -189,14 +189,13 @@ async function sendToValidateEmailFromMakeWebhook({ data, interaction, command }
           );
 
         await wait(2500)
-        await interaction.deferReply({
+        await interaction.editReply({
           content: replaceToMemberUserTag(discordTexts.webHook.error.text, member),
           ephemeral: true,
           components: [buttons],
         });
       }
     }
-    return;
   } catch (error) {
     await wait(2500)
 
@@ -206,8 +205,6 @@ async function sendToValidateEmailFromMakeWebhook({ data, interaction, command }
       components: [rowMessage]
     });
   }
-
-  return;
 }
 
 async function verifyLeaveInput(interaction) {
