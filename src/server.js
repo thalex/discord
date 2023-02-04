@@ -77,7 +77,7 @@ async function handleButtonInteraction(interaction) {
 
     await interaction.showModal(modal);
   } catch (error) {
-    await interaction.reply({ 
+    await interaction.editReply({ 
       content: replaceToMemberUserTag(discordTexts.discord.notFoundStatus.text), 
       ephemeral: true,
     });
