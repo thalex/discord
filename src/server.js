@@ -1,8 +1,8 @@
 require("dotenv").config();
+require('./commands/registerCommand.js');
 const { default: axios } = require('axios');
 
 const wait = require('node:timers/promises').setTimeout;
-
 
 const {
   discordTexts, replaceToMemberUserTag
